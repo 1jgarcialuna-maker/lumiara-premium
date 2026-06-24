@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta name="google-adsense-account" content="ca-pub-6796763332340046">
+  <meta charset="utf-8">
+  <title>Florescer - Guia do Recomeço | Lumiara</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    :root {
+      --navy: #08243d;
+      --navy-2: #123c5a;
+      --gold: #c99b42;
+      --gold-soft: #e5c684;
+      --beige: #f3eadb;
+      --paper: #fffaf0;
+      --ink: #20303a;
+      --muted: #63707a;
+      --line: rgba(8, 36, 61, .16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #ddd;
+      font-family: "Segoe UI", "Trebuchet MS", Arial, sans-serif;
+      line-height: 1.62;
+    }
+
+    .page {
+      position: relative;
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top left, rgba(229, 198, 132, .24), transparent 34%),
+        linear-gradient(180deg, #fffdf8 0%, var(--paper) 100%);
+      page-break-after: always;
+      padding: 25mm 22mm 22mm;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+    }
+
+    .cover {
+      display: flex;
+      min-height: 297mm;
+      padding: 0;
+      color: #fff;
+      background:
+        radial-gradient(circle at 28% 24%, rgba(229, 198, 132, .32), transparent 28%),
+        linear-gradient(140deg, #061c31 0%, #08243d 50%, #143f5c 100%);
+    }
+
+    .cover-inner {
+      width: 100%;
+      padding: 27mm 24mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 2.5mm solid rgba(243, 234, 219, .16);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--gold-soft);
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+
+    .mark {
+      width: 34px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid var(--gold-soft);
+      border-radius: 50%;
+      background: #08243d;
+      color: var(--gold-soft);
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    h1,
+    h2,
+    h3,
+    .display {
+      margin: 0;
+      font-family: "Arial Rounded MT Bold", "Segoe UI", "Trebuchet MS", Arial, sans-serif;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .cover h1 {
+      margin-top: 46mm;
+      color: #fff6df;
+      font-size: 68px;
+      text-shadow: 0 2px 0 rgba(0, 0, 0, .12);
+    }
+
+    .cover .subtitle {
+      max-width: 132mm;
+      margin-top: 8mm;
+      color: #f7e8c4;
+      font-size: 25px;
+      line-height: 1.35;
+    }
+
+    .cover .series {
+      width: fit-content;
+      margin-bottom: 8mm;
+      padding: 8px 16px;
+      border: 1px solid rgba(229, 198, 132, .7);
+      border-radius: 999px;
+      color: #f7e8c4;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: .04em;
+    }
+
+    .cover-note {
+      max-width: 128mm;
+      color: rgba(255, 250, 240, .86);
+      font-size: 16px;
+    }
+
+    .page-number {
+      position: absolute;
+      right: 20mm;
+      bottom: 12mm;
+      color: rgba(8, 36, 61, .48);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .chapter-label {
+      color: var(--gold);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .11em;
+      font-size: 12px;
+    }
+
+    h2 {
+      margin-top: 8px;
+      color: var(--navy);
+      font-size: 36px;
+    }
+
+    h3 {
+      margin: 18px 0 8px;
+      color: var(--navy-2);
+      font-size: 20px;
+    }
+
+    p {
+      margin: 9px 0;
+      font-size: 15.8px;
+    }
+
+    .lead {
+      margin-top: 14px;
+      color: var(--navy-2);
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    .toc {
+      margin-top: 18mm;
+      border-top: 1px solid var(--line);
+    }
+
+    .toc-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 16px;
+    }
+
+    .toc-row strong {
+      color: var(--navy);
+    }
+
+    .toc-row span {
+      color: var(--gold);
+      font-weight: 800;
+    }
+
+    .quote {
+      margin: 18px 0;
+      padding: 17px 19px;
+      border-left: 5px solid var(--gold);
+      border-radius: 0 16px 16px 0;
+      background: rgba(229, 198, 132, .18);
+      color: var(--navy);
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .soft-box {
+      margin-top: 16px;
+      padding: 16px 18px;
+      border: 1px solid rgba(201, 155, 66, .35);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .66);
+    }
+
+    .exercise {
+      margin-top: 18px;
+      padding: 17px 18px 18px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(8, 36, 61, .94), rgba(18, 60, 90, .94));
+      color: #fffaf0;
+    }
+
+    .exercise h3 {
+      margin-top: 0;
+      color: var(--gold-soft);
+    }
+
+    .exercise p,
+    .exercise li {
+      color: rgba(255, 250, 240, .92);
+    }
+
+    .lines {
+      margin-top: 10px;
+    }
+
+    .line {
+      height: 32px;
+      border-bottom: 1px solid rgba(255, 250, 240, .42);
+    }
+
+    .paper-lines .line {
+      border-bottom-color: rgba(8, 36, 61, .22);
+    }
+
+    .reflection-list {
+      margin: 13px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    .reflection-list li {
+      padding: 9px 12px;
+      border-radius: 14px;
+      background: rgba(243, 234, 219, .7);
+      color: var(--navy);
+      font-size: 14.5px;
+    }
+
+    .reflection-list b {
+      color: var(--gold);
+    }
+
+    .table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .table-card {
+      min-height: 106px;
+      padding: 14px;
+      border: 1px solid rgba(255, 250, 240, .34);
+      border-radius: 16px;
+    }
+
+    .table-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--gold-soft);
+    }
+
+    .footer-note {
+      position: absolute;
+      left: 22mm;
+      bottom: 12mm;
+      color: rgba(8, 36, 61, .45);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .closing {
+      padding: 28mm 24mm;
+      color: #fff;
+      background:
+        radial-gradient(circle at 82% 12%, rgba(229, 198, 132, .24), transparent 31%),
+        linear-gradient(155deg, #08243d 0%, #061c31 60%, #123c5a 100%);
+    }
+
+    .closing h2 {
+      color: #fff6df;
+      font-size: 44px;
+    }
+
+    .closing p {
+      max-width: 148mm;
+      color: rgba(255, 250, 240, .9);
+      font-size: 18px;
+      line-height: 1.72;
+    }
+
+    .closing .signature {
+      margin-top: 15mm;
+      color: var(--gold-soft);
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .page {
+        margin: 0;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="page cover">
+    <div class="cover-inner">
+      <div class="brand"><span class="mark">✦</span> Lumiara</div>
+      <div>
+        <div class="series">Guia do Recomeço</div>
+        <h1>Florescer</h1>
+        <div class="subtitle">Um guia para quem está aprendendo a confiar no processo</div>
+      </div>
+      <p class="cover-note">
+        21 reflexões para reencontrar clareza, direção e propósito em uma nova fase da vida.
+      </p>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="chapter-label">Antes de começar</div>
+    <h2>Este guia é um convite</h2>
+    <p class="lead">
+      Talvez você esteja vivendo uma fase em que parece que nada anda, nada chega e tudo demora mais do que deveria.
+      Este material foi criado para te acolher nesse lugar, mas também para te lembrar de algo importante:
+      a forma como você encara essa fase pode mudar tudo.
+    </p>
+    <p>
+      Aqui não existe promessa mágica. Existe consciência, cuidado, decisão e prática. Cada reflexão foi pensada
+      com carinho para te ajudar a extrair o melhor que já existe dentro de você. Eu caminho com você nas páginas,
+      mas quem escolhe levantar, observar, ajustar e agir é você.
+    </p>
+    <div class="quote">
+      Você não precisa resolver a vida inteira hoje. Precisa apenas dar um passo honesto na direção da mulher que quer se tornar.
+    </div>
+    <div class="soft-box">
+      <h3>Como usar este PDF</h3>
+      <p>Leia com calma, escreva sem se julgar e volte aos exercícios sempre que sentir que está perdendo a direção.</p>
+      <p>Use este guia como um espaço de pausa, clareza e recomeço.</p>
+    </div>
+    <div class="page-number">2</div>
+    <div class="footer-note">Lumiara · Guia do Recomeço</div>
+  </section>
+
+  <section class="page">
+    <div class="chapter-label">Índice</div>
+    <h2>O caminho deste guia</h2>
+    <div class="toc">
+      <div class="toc-row"><strong>Capítulo 1 · Nem todo atraso é rejeição</strong><span>04</span></div>
+      <div class="toc-row"><strong>Capítulo 2 · O que você está regando hoje?</strong><span>06</span></div>
+      <div class="toc-row"><strong>Capítulo 3 · Deus muda você antes de mudar sua situação</strong><span>08</span></div>
+      <div class="toc-row"><strong>Capítulo 4 · Pare de lutar contra o processo</strong><span>10</span></div>
+      <div class="toc-row"><strong>Capítulo 5 · Você não está começando do zero</strong><span>12</span></div>
+      <div class="toc-row"><strong>Capítulo 6 · A direção é mais importante que a velocidade</strong><span>14</span></div>
+      <div class="toc-row"><strong>Carta final · Um passo de cada vez</strong><span>16</span></div>
+    </div>
+    <div class="soft-box">
+      <h3>Um lembrete importante</h3>
+      <p>
+        Este guia apoia a sua melhora, mas a mudança depende da sua postura depois da leitura.
+        Juntas, podemos abrir clareza. A ação, porém, nasce da sua escolha diária.
+      </p>
+    </div>
+    <div class="page-number">3</div>
+    <div class="footer-note">Lumiara · Guia do Recomeço</div>
+  </section>
+
+  <section class="page">
+    <div class="chapter-label">Capítulo 1</div>
+    <h2>Nem todo atraso é rejeição</h2>
+    <p class="lead">
+      Quando algo demora, a mente costuma preencher o silêncio com medo: "não vai acontecer", "não sou capaz",
+      "talvez não seja para mim". Mas atraso nem sempre é fechamento de porta. Às vezes, é preparo.
+    </p>
+    <p>
+      A ansiedade por resultados nasce quando o coração exige respostas antes do tempo. Ela cresce quando você
+      compara a sua vida com a vitrine dos outros e cria expectativas irreais sobre onde já deveria estar.
+    </p>
+    <p>
+      O tempo não existe apenas para testar a sua paciência. Ele também revela o que precisa amadurecer,
+      o que precisa ser ajustado e o que você ainda precisa aprender para sustentar aquilo que deseja.
+    </p>
+    <div class="quote">Uma espera bem vivida também constrói destino.</div>
+    <h3>Reflexões deste capítulo</h3>
+    <ul class="reflection-list">
+      <li><b>1.</b> O que eu estou chamando de atraso pode ser apenas uma fase de preparo?</li>
+      <li><b>2.</b> Qual expectativa minha está me pressionando mais do que ajudando?</li>
+      <li><b>3.</b> O que eu posso aprender enquanto a resposta não chega?</li>
+    </ul>
+    <div class="page-number">4</div>
+    <div class="footer-note">Lumiara · Guia do Recomeço</div>
+  </section>
+
+  <section class="page">
+    <div class="chapter-label">Exercício 1</div>
+    <h2>Reconheça o que já floresceu</h2>
+    <p class="lead">
+      Antes de concluir que nada aconteceu, olhe para trás com honestidade. Você já venceu processos que hoje talvez
+      pareçam pequenos, mas que exigiram força da mulher que você era.
+    </p>
+    <div class="exercise">
+      <h3>Liste 3 coisas que você conquistou nos últimos 5 anos</h3>
+      <p>Pode ser algo emocional, profissional, financeiro, familiar, espiritual ou pessoal.</p>
+      <div class="lines">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </div>
+    <div class="soft-box paper-lines">
+      <h3>Depois responda</h3>
+      <p>O que essas conquistas dizem sobre a sua capacidade de continuar?</p>
+      <div class="lines">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </div>
+    <div class="page-number">5</div>
+    <div class="footer-note">Lumiara · Guia do Recomeço</div>
+  </section>
+
+  <section class="page">
+    <div class="chapter-label">Capítulo 2</div>
+    <h2>O que você está regando hoje?</h2>
+    <p class="lead">
+      Tudo que cresce na sua vida recebe algum tipo de alimento: atenção, repetição, ambiente, pensamento e escolha.
+      Por isso, uma pergunta simples pode abrir muita clareza: o que eu tenho regado todos os dias?
+    </p>
+    <p>
+      Hábitos pequenos constroem estados internos grandes. O que você consome, as conversas que aceita, os lugares
+      onde permanece e as ideias que repete sobre si mesma formam o terreno da sua próxima fase.
+    </p>
+    <p>
+      Se você quer uma vida mais leve, precisa observar o que continua alimentando peso. Nem sempre a mudança começa
+      fazendo mais. Às vezes, começa reduzindo aquilo que rouba presença, coragem e paz.
+    </p>
+    <h3>Reflexões deste capítulo</h3>
+    <ul class="reflection-list">
+      <li><b>4.</b> Qual hábito pequeno tem influenciado demais o meu estado emocional?</li>
+      <li><b>5.</b> Que tipo de ambiente desperta o melhor em mim?</li>
+      <li><b>6.</b> Que pensamento eu preciso parar de repetir como se fosse verdade?</li>
+      <li><b>7.</b> O que eu posso começar a regar hoje, mesmo em pequena medida?</li>
+    </ul>
+    <div class="page-number">6</div>
+    <div class="footer-note">Lumiara · Guia do Recomeço</div>
+  </section>
+
+  <section class="page">
+    <div class="chapter-label">Exercício 2</div>
+    <h2>Escolha o que fica e o que sai</h2>
+    <p class="lead">
+      Use esta tabela com sinceridade. Não escreva o que parece bonito. Escreva o que é real.
+    </p>
+    <div class="exercise">
+      <div class="table">
+        <div class="table-card">
+          <strong>Estou alimentando:</strong>
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+        <div class="table-card">
+          <strong>Preciso reduzir:</strong>
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+      </div>
+    </div>
+    <div class="soft-box">
+      <h3>Primeira atitude prática</h3>
+      <p>Qual é uma coisa pequena que você consegue mudar nos próximos 7 dias?</p>
+      <div class="paper-lines lines">
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </div>
+    <div class="page-number">7</div>
+    <div class="footer-note">Lumiara · Guia do Recomeço</div>
+  </section>
+
+  <section class="page">
+    <div class="chapter-label">Capítulo 3</div>
+    <h2>Deus muda você antes de mudar sua situação</h2>
+    <p class="lead">
+      Algumas fases não chegam para te punir. Elas chegam para te preparar. Antes de mudar o cenário, Deus pode estar
+      mudando a forma como você se enxerga, decide, espera e reage.
+    </p>
+    <p>
+      O amadurecimento quase nunca parece bonito enquanto acontece. Ele mexe com orgulho, pressa, insegurança e controle.
+      Mas também cria firmeza, discernimento e uma força mais silenciosa.
+    </p>
+    <p>
+      Você pode chamar isso de fé, vida, processo ou aprendizado. O nome importa menos do que a postura: existe algo
+      nessa fase tentando te ensinar a ser maior por dentro antes que a situação mude por fora.
+    </p>
+    <div class="quote">A pergunta não é apenas "quando isso vai mudar?", mas "quem eu estou me tornando enquanto isso não muda?".</div>
+    <h3>Reflexões deste capítulo</h3>
+    <ul class="reflection-list">
+      <li><b>8.</b> Em que área eu estou sendo chamada a amadurecer?</li>
+      <li><b>9.</b> O que essa fase está tentando me ensinar?</li>
+      <li><b>10.</b> Que reação minha precisa ser transformada antes da situação mudar?</li>
+    </ul>
+    <div class="page-number">8</div>
+    <div class="footer-note">Lumiara · Guia do Recomeço</div>
+  </section>
+
+  <section class="page">
+    <div class="chapter-label">Exercício 3</div>
+    <h2>Escute a fase</h2>
+    <p class="lead">
+      Nem toda resposta aparece como solução imediata. Às vezes, ela aparece como consciência.
+    </p>
+    <div class="exercise">
+      <h3>Responda com calma</h3>
+      <p>O que essa fase está tentando me ensinar?</p>
+      <div class="lines">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </div>
+    <div class="soft-box paper-lines">
+      <h3>Uma decisão para hoje</h3>
+      <p>Qual atitude mostraria que eu aprendi algo com esse processo?</p>
+      <div class="lines">
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </div>
+    <div class="page-number">9</div>
+    <div class="footer-note">Lumiara · Guia do Recomeço</div>
+  </section>
+
+  <section class="page">
+    <div class="chapter-label">Capítulo 4</div>
+    <h2>Pare de lutar contra o processo</h2>
+    <p class="lead">
+      Aceitar não é desistir. Aceitar é parar de gastar toda a sua força brigando com o que já está acontecendo
+      para começar a usar essa força de forma mais inteligente.
+    </p>
+    <p>
+      O crescimento gradual também é crescimento. A ansiedade desvaloriza pequenas vitórias porque quer grandes
+      mudanças imediatas. Mas uma vida nova costuma nascer em detalhes repetidos: um limite, uma escolha, uma conversa,
+      um "não", uma tentativa.
+    </p>
+    <p>
+      Quando você para de lutar contra o processo, começa a perceber onde ainda existe movimento. E onde existe movimento,
+      existe possibilidade.
+    </p>
+    <h3>Reflexões deste capítulo</h3>
+    <ul class="reflection-list">
+      <li><b>11.</b> Contra qual realidade eu estou brigando todos os dias?</li>
+      <li><b>12.</b> Que pequena vitória recente eu tratei como se não fosse nada?</li>
+      <li><b>13.</b> Como eu posso agir com mais presença nesta fase?</li>
+      <li><b>14.</b> O que eu preciso aceitar para conseguir avançar?</li>
+    </ul>
+    <div class="page-number">10</div>
+    <div class="footer-note">Lumiara · Guia do Recomeço</div>
+  </section>
+
+  <section class="page">
+    <div class="chapter-label">Exercício 4</div>
+    <h2>Veja os avanços que você ignorou</h2>
+    <p class="lead">
+      Nem todo avanço faz barulho. Alguns aparecem como mais calma, mais consciência, mais limite, mais coragem.
+    </p>
+    <div class="exercise">
+      <h3>Escreva 5 avanços que você ignorou nos últimos meses</h3>
+      <div class="lines">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </div>
+    <div class="soft-box">
+      <h3>Agora observe</h3>
+      <p>Qual desses avanços prova que você não está parada?</p>
+    </div>
+    <div class="page-number">11</div>
+    <div class="footer-note">Lumiara · Guia do Recomeço</div>
+  </section>
+
+  <section class="page">
+    <div class="chapter-label">Capítulo 5</div>
+    <h2>Você não está começando do zero</h2>
+    <p class="lead">
+      Recomeçar pode parecer voltar para o início, mas não é. Você volta com história, aprendizados, cicatrizes,
+      percepção e experiência acumulada.
+    </p>
+    <p>
+      A mulher que recomeça hoje não é a mesma que um dia teve medo de tentar. Mesmo cansada, ela carrega ferramentas
+      que antes não tinha. Ela já sabe identificar sinais, reconhecer excessos, entender limites e escolher melhor.
+    </p>
+    <p>
+      Autoconfiança não nasce apenas de grandes vitórias. Ela nasce quando você reconhece que já atravessou muita coisa
+      e ainda está aqui, capaz de aprender e agir de novo.
+    </p>
+    <h3>Reflexões deste capítulo</h3>
+    <ul class="reflection-list">
+      <li><b>15.</b> O que eu aprendi depois de uma fase que achei que não suportaria?</li>
+      <li><b>16.</b> Que habilidade minha ficou mais forte no último ano?</li>
+      <li><b>17.</b> Que escolha antiga eu não repetiria hoje?</li>
+    </ul>
+    <div class="page-number">12</div>
+    <div class="footer-note">Lumiara · Guia do Recomeço</div>
+  </section>
+
+  <section class="page">
+    <div class="chapter-label">Exercício 5</div>
+    <h2>Reconheça sua bagagem</h2>
+    <p class="lead">
+      A sua experiência não é peso quando vira sabedoria. Escreva para lembrar a si mesma que existe caminho dentro de você.
+    </p>
+    <div class="exercise">
+      <h3>Liste tudo o que você sabe hoje e não sabia há um ano</h3>
+      <div class="lines">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </div>
+    <div class="soft-box">
+      <h3>Transforme em ação</h3>
+      <p>Como esse aprendizado pode te ajudar na decisão que você precisa tomar agora?</p>
+    </div>
+    <div class="page-number">13</div>
+    <div class="footer-note">Lumiara · Guia do Recomeço</div>
+  </section>
+
+  <section class="page">
+    <div class="chapter-label">Capítulo 6</div>
+    <h2>A direção é mais importante que a velocidade</h2>
+    <p class="lead">
+      A comparação faz você acreditar que está atrasada porque outra pessoa parece estar correndo. Mas velocidade sem
+      direção também cansa, dispersa e confunde.
+    </p>
+    <p>
+      Nas redes sociais, quase sempre vemos resultados, não processos. Vemos chegadas, não renúncias. Vemos recortes,
+      não noites difíceis. Por isso, medir a sua vida pela vitrine dos outros rouba a clareza do seu próprio caminho.
+    </p>
+    <p>
+      Propósito não exige pressa o tempo todo. Ele exige alinhamento. Um passo pequeno na direção certa vale mais do que
+      muitos movimentos feitos apenas para provar alguma coisa.
+    </p>
+    <h3>Reflexões deste capítulo</h3>
+    <ul class="reflection-list">
+      <li><b>18.</b> Com quem eu tenho me comparado em silêncio?</li>
+      <li><b>19.</b> O que eu realmente quero construir, além de parecer bem para os outros?</li>
+      <li><b>20.</b> Qual passo pequeno me colocaria na direção certa esta semana?</li>
+      <li><b>21.</b> Onde eu quero estar em 12 meses e quem preciso me tornar para chegar lá?</li>
+    </ul>
+    <div class="page-number">14</div>
+    <div class="footer-note">Lumiara · Guia do Recomeço</div>
+  </section>
+
+  <section class="page">
+    <div class="chapter-label">Exercício 6</div>
+    <h2>Desenhe uma direção possível</h2>
+    <p class="lead">
+      Não escreva uma vida perfeita. Escreva uma direção possível, honesta e sua.
+    </p>
+    <div class="exercise">
+      <h3>Onde você quer estar em 12 meses?</h3>
+      <div class="lines">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </div>
+    <div class="soft-box paper-lines">
+      <h3>Primeiros 3 passos</h3>
+      <p>Escreva ações pequenas, claras e possíveis.</p>
+      <div class="lines">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </div>
+    <div class="page-number">15</div>
+    <div class="footer-note">Lumiara · Guia do Recomeço</div>
+  </section>
+
+  <section class="page closing">
+    <div class="brand"><span class="mark">✦</span> Lumiara</div>
+    <h2>Uma carta para você</h2>
+    <p>
+      Talvez você tenha chegado até aqui cansada, confusa ou sem saber qual é o próximo passo.
+      Talvez exista uma parte sua querendo desistir, e outra parte ainda tentando acreditar.
+    </p>
+    <p>
+      Então guarde isso com carinho: você não precisa ter todas as respostas hoje. Você não precisa provar força o tempo
+      todo. Você não precisa correr só porque parece que todo mundo chegou antes.
+    </p>
+    <p>
+      Mas você precisa escolher como vai encarar daqui para frente. A sua história não muda apenas porque você leu algo
+      bonito. Ela começa a mudar quando você decide agir de um jeito novo, mesmo que seja devagar.
+    </p>
+    <p>
+      Eu acredito que existe muito mais dentro de você do que essa fase conseguiu mostrar. Estes guias foram feitos com
+      carinho para te ajudar a enxergar isso, organizar seus sentimentos e lembrar que você pode recomeçar.
+    </p>
+    <p>
+      Um passo de cada vez. Uma escolha de cada vez. Uma nova postura de cada vez.
+    </p>
+    <div class="signature">Com carinho, Lumiara</div>
+  </section>
+</body>
+</html>

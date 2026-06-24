@@ -1,0 +1,1126 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Herbário da Alma | Lumiara</title>
+  <style>
+    @page { size:A4; margin:0; }
+    :root { --navy:#071f36; --navy2:#123c5a; --gold:#c99b42; --gold2:#ecd394; --paper:#fffdf8; --ink:#263740; --muted:#617078; --sage:#667f70; --line:rgba(7,31,54,.14); }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#d8dcdf; color:var(--ink); font-family:"Segoe UI",Arial,sans-serif; line-height:1.48; }
+    .page { position:relative; width:210mm; height:297mm; margin:0 auto; overflow:hidden; page-break-after:always; background:var(--paper); }
+    .page:last-child { page-break-after:auto; }
+    .page-inner { position:relative; height:100%; padding:21mm 20mm 18mm; }
+    .cover { color:#fff; background:#071f36 url("../assets/ervas-tradicionais-capa-lumiara.png") center/cover no-repeat; }
+    .cover-shade { position:absolute; inset:0; background:linear-gradient(90deg,rgba(4,20,34,.94),rgba(4,20,34,.62) 58%,rgba(4,20,34,.08)),linear-gradient(0deg,rgba(4,20,34,.66),transparent 52%); }
+    .cover-content { position:relative; z-index:1; display:flex; height:100%; flex-direction:column; justify-content:space-between; padding:22mm 20mm; border:2mm solid rgba(236,211,148,.22); }
+    .brand { color:var(--gold2); font-size:14px; font-weight:900; letter-spacing:.15em; text-transform:uppercase; }
+    .cover-copy { max-width:128mm; }
+    .kicker,.eyebrow { margin:0 0 4mm; color:var(--gold); font-size:11px; font-weight:900; letter-spacing:.13em; text-transform:uppercase; }
+    .cover .kicker { color:var(--gold2); }
+    h1,h2,h3 { margin:0; font-family:Georgia,"Times New Roman",serif; line-height:1.06; }
+    h1 { color:#fff7df; font-size:53px; }
+    h2 { max-width:155mm; color:var(--navy); font-size:32px; }
+    h3 { color:var(--navy2); font-size:23px; }
+    .subtitle { max-width:118mm; margin:8mm 0 0; color:#f8e8bc; font:700 22px/1.35 Georgia,serif; }
+    .cover-note { max-width:116mm; margin-top:6mm; color:rgba(255,255,255,.78); font-size:15px; }
+    .cover-footer { color:rgba(255,255,255,.7); font-size:12px; }
+    .text-page { background:linear-gradient(180deg,#fffefb,#fffaf1); }
+    .text-page::before,.herb-page::before { content:""; position:absolute; inset:0 auto 0 0; width:7mm; background:var(--navy); }
+    p { margin:5mm 0 0; font-size:15px; }
+    blockquote { margin:10mm 0 0; padding:6mm 0 0 7mm; border-top:1px solid rgba(201,155,66,.5); border-left:3px solid var(--gold); color:var(--navy); font:700 23px/1.35 Georgia,serif; }
+    .safety { margin-top:8mm; padding:6mm; border:1px solid rgba(183,126,119,.55); border-radius:6px; background:#fff; color:var(--navy); font-weight:700; }
+    .page-number { position:absolute; right:20mm; bottom:9mm; color:#849098; font-size:10px; }
+    .chapter-page { color:#fff; background:linear-gradient(135deg,#061c31,#174b61); }
+    .chapter-page.world { background:linear-gradient(135deg,#17372f,#52705e); }
+    .chapter-page .page-inner { display:flex; flex-direction:column; justify-content:center; padding:28mm; }
+    .chapter-page h2,.closing-page h2 { color:#fff5d8; font-size:45px; }
+    .chapter-page p { color:rgba(255,255,255,.82); font-size:17px; }
+    .chapter-list { margin-top:12mm; padding:6mm; border:1px solid rgba(236,211,148,.38); color:var(--gold2); font-weight:800; line-height:1.8; }
+    .herb-page { background:radial-gradient(circle at 88% 8%,rgba(201,155,66,.13),transparent 28%),linear-gradient(180deg,#fffdf8,#f3f6f0); }
+    .herb-single { height:244mm; }
+    .herb-card { position:relative; min-height:226mm; padding:10mm 13mm 18mm; overflow:hidden; border:1px solid rgba(102,127,112,.2); border-radius:8px; background:rgba(255,255,255,.9); box-shadow:0 8px 24px rgba(7,31,54,.05); }
+    .herb-card::before { content:""; position:absolute; width:58mm; height:58mm; right:-20mm; top:-23mm; border:1px solid rgba(201,155,66,.2); border-radius:50%; }
+    .herb-card::after { content:""; position:absolute; inset:0 0 0 auto; width:3mm; background:linear-gradient(180deg,var(--gold),var(--sage)); opacity:.72; }
+    .herb-card .latin { margin:0 0 2mm; color:var(--gold); font:italic 12px Georgia,serif; }
+    .herb-card h3 { color:var(--navy); font-size:34px; }
+    .herb-section { margin-top:5mm; }
+    .herb-section h4,.spiritual h4 { margin:0 0 1.5mm; color:var(--sage); font-size:10.5px; font-weight:900; letter-spacing:.12em; text-transform:uppercase; }
+    .herb-section p { margin:0; color:var(--ink); font:15px/1.48 Georgia,"Times New Roman",serif; }
+    .herb-section.ritual { margin-top:5mm; padding:4mm 5mm; border-left:3px solid var(--gold); background:#fffaf0; }
+    .herb-section.ritual h4 { color:var(--navy2); font-size:12px; }
+    .herb-section.ritual p { font-family:"Segoe UI",Arial,sans-serif; font-size:12.6px; line-height:1.45; }
+    .herb-section.traditional { margin-top:4mm; padding-bottom:3mm; border-bottom:1px solid rgba(102,127,112,.14); }
+    .herb-section.traditional p { color:var(--navy2); font-family:"Segoe UI",Arial,sans-serif; font-size:12.4px; }
+    .ingredients { display:flex; flex-wrap:wrap; gap:2mm 5mm; margin:0 0 2.5mm; padding:0; list-style:none; }
+    .ingredients li { color:#69552e; font-size:11.5px; font-weight:800; }
+    .ingredients li::before { content:"✧"; margin-right:1.5mm; color:var(--gold); }
+    .heritage p { color:var(--muted); font-family:"Segoe UI",Arial,sans-serif; font-size:12.5px; }
+    .spiritual { margin-top:5mm; }
+    .spiritual p { display:flex; flex-wrap:wrap; gap:2mm; margin:0; }
+    .spiritual span { padding:1.5mm 3mm; border:1px solid rgba(102,127,112,.28); border-radius:20px; color:var(--navy2); font:700 11px Georgia,serif; }
+    .plant-question { margin:5mm 0 0; padding:3.5mm 0 0 5mm; border-top:1px solid rgba(201,155,66,.45); border-left:2px solid var(--gold); color:var(--navy); font:700 17px/1.35 Georgia,serif; }
+    .plant-question span { display:block; margin-bottom:1mm; color:var(--gold); font:900 9px "Segoe UI",Arial,sans-serif; letter-spacing:.13em; text-transform:uppercase; }
+    .herb-card .care { position:absolute; right:13mm; bottom:7mm; left:13mm; margin:0; padding-top:2.5mm; border-top:1px solid rgba(7,31,54,.09); color:#80766b; font-size:9.5px; line-height:1.35; }
+    .practice { margin:8mm 0 0; padding:0; list-style:none; counter-reset:item; }
+    .practice li { counter-increment:item; position:relative; margin-bottom:4mm; padding:4mm 5mm 4mm 14mm; border:1px solid var(--line); border-radius:5px; background:#fff; font-size:13.2px; }
+    .practice li::before { content:counter(item); position:absolute; left:5mm; top:3mm; color:var(--gold); font:700 20px Georgia,serif; }
+    .practice.compact li { margin-bottom:3mm; }
+    .three-columns { display:grid; grid-template-columns:repeat(3,1fr); gap:4mm; margin-top:9mm; }
+    .three-columns article { padding:5mm; border-top:3px solid var(--gold); background:#fff; }
+    .three-columns h3 { font-size:18px; }
+    .three-columns p { font-size:12.5px; }
+    .glossary { margin-top:8mm; }
+    .glossary dt { margin-top:5mm; color:var(--navy); font:700 18px Georgia,serif; }
+    .glossary dd { margin:1mm 0 0; padding-bottom:3mm; border-bottom:1px solid var(--line); color:var(--muted); font-size:13.5px; }
+    .references-page ul { margin-top:8mm; padding-left:6mm; }
+    .references-page li { margin-bottom:4mm; font-size:13.5px; }
+    .closing-page { color:#fff; background:linear-gradient(135deg,#061c31,#234d42); }
+    .closing-page .page-inner { display:flex; flex-direction:column; justify-content:center; padding:27mm; }
+    .closing-page p { color:rgba(255,255,255,.82); font-size:17px; }
+    .closing-page blockquote { color:#fff3cd; border-color:var(--gold2); }
+    .signature { color:var(--gold2)!important; font:700 30px Georgia,serif!important; }
+    @media print { body { background:none; } .page { margin:0; } }
+  </style>
+</head>
+<body><section class="page cover">
+  <div class="cover-shade"></div>
+  <div class="cover-content">
+    <div class="brand">Lumiara</div>
+    <div class="cover-copy">
+      <p class="kicker">E-book gratuito</p>
+      <h1>Herbário da Alma</h1>
+      <p class="subtitle">Ervas, memórias e saberes que atravessam gerações</p>
+      <p class="cover-note">Um caminho sensorial por aromas, quintais, banhos e tradições espirituais.</p>
+    </div>
+    <div class="cover-footer">28 encontros com o mundo vivo das plantas</div>
+  </div>
+</section>
+<section class="page text-page"><div class="page-inner">
+  <p class="eyebrow">Um convite</p>
+  <h2>Antes de conhecer uma planta, aproxime-se.</h2>
+  <p>Observe a forma das folhas. Perceba se a superfície é lisa, áspera, macia ou firme. Toque apenas quando souber que a planta permite. Aproxime-se do aroma sem pressa. Veja como ela ocupa a luz, reage ao vento e transforma o lugar onde cresce.</p>
+  <p>As plantas chegam até nós por muitos caminhos: alimento, perfume, quintal, remédio, memória, oração, banho, benzimento e cuidado. Este herbário não pretende separar essas dimensões. Ele convida você a percebê-las juntas, com presença e respeito.</p>
+  <p>Algumas páginas trazem banhos tradicionais; outras propõem encontros pela cozinha, pelo cultivo ou pela contemplação. Nem toda planta precisa tocar a pele para tocar a vida.</p>
+  <blockquote>Conhecer uma planta começa quando deixamos de olhar apenas para sua utilidade e percebemos sua presença.</blockquote>
+  <span class="page-number">2</span>
+</div></section>
+<section class="page text-page"><div class="page-inner">
+  <p class="eyebrow">Como atravessar este herbário</p>
+  <h2>Leia com os olhos, mas também com os sentidos.</h2>
+  <p>Talvez você reconheça uma folha da infância. Talvez um aroma devolva a lembrança de uma cozinha, de uma avó, de um quintal molhado ou de uma casa onde havia vasos perto da porta.</p>
+  <p>Em cada encontro, você encontrará a sensação despertada pela planta, uma forma tradicional ou simbólica de aproximação, memórias de seus caminhos culturais, significados espirituais e uma pergunta para acompanhar a leitura.</p>
+  <p>As notas de cuidado aparecem ao final, discretas, porque reverência também é saber que a natureza tem potência. Identifique corretamente cada espécie e escute o próprio corpo.</p>
+  <blockquote>Não tenha pressa de terminar. Algumas plantas pedem que a página permaneça aberta por mais tempo.</blockquote>
+  <span class="page-number">3</span>
+</div></section>
+<section class="page chapter-page brazil"><div class="page-inner">
+  <p class="eyebrow">Parte I</p>
+  <h2>Ervas e plantas da tradição brasileira</h2>
+  <p>O Brasil reúne uma das maiores diversidades vegetais do planeta e uma imensa diversidade de modos de conhecer. Falar de plantas brasileiras exige reconhecer povos, territórios e histórias — e também proteger espécies contra exploração e apagamento.</p>
+  <p>Nesta primeira parte, as plantas chegam pelo cheiro dos quintais, pelos gestos das benzedeiras, pela cozinha, pelas histórias de família e pela diversidade dos territórios brasileiros.</p>
+  <div class="chapter-list">Aroeira-vermelha • Jaborandi • Urucum • Assa-peixe • Espinheira-santa • Alho • Guaco • Quebra-pedra • Folha de amora • Pitanga • Babosa • Ora-pro-nóbis</div>
+  <span class="page-number">4</span>
+</div></section>
+<section class="page herb-page" id="aroeira-vermelha">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Aroeira-vermelha • Schinus terebinthifolia</p>
+    <h3>Aroeira-vermelha</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>A aroeira tem presença firme. Suas folhas e frutos parecem guardar o calor da terra, enquanto o aroma verde e resinoso transmite força, limite e proteção. É uma planta que não passa despercebida: ocupa o espaço como quem sustenta uma fronteira.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Banho tradicional de firmeza</h4>
+      <ul class="ingredients"><li>1 litro de água</li><li>1 pequeno punhado de folhas de aroeira bem identificada</li></ul>
+      <p>Aqueça a água, desligue o fogo e acrescente as folhas. Deixe descansar, coe e espere amornar. Em tradições populares, o banho é usado do pescoço para baixo como gesto de proteção e encerramento de ciclos pesados.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>É usada tradicionalmente em preparações externas para desconfortos e irritações leves da pele.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Nativa do Brasil, a aroeira atravessa quintais, caminhos rurais, práticas de cuidado e tradições religiosas. Sua madeira resistente e sua capacidade de adaptação ajudaram a formar a imagem de uma planta que protege e permanece.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Proteção</span><span>Firmeza</span><span>Limites</span><span>Resistência</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>O que em você continua firme mesmo depois das tempestades?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Pode causar sensibilidade em algumas pessoas.</p>
+  </article></div>
+        <span class="page-number">5</span>
+      </div>
+    </section>
+<section class="page herb-page" id="jaborandi">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Jaborandi • Pilocarpus microphyllus</p>
+    <h3>Jaborandi</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>As folhas do jaborandi parecem concentrar movimento. Seu verde profundo e sua história despertam a impressão de uma planta intensa, quente e ativa, daquelas que pedem respeito antes mesmo de serem tocadas.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Uma planta para contemplar</h4>
+      
+      <p>Aqui, o encontro não precisa acontecer em forma de banho. Observe a folha, o desenho de suas nervuras e a força de sua história. O jaborandi convida a reconhecer que algumas plantas se aproximam de nós pela ciência, pela conservação e pelo respeito à sua potência.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>É fonte de pilocarpina, substância usada em medicamentos sob controle profissional, especialmente para estimular saliva e em tratamentos oftalmológicos específicos.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Planta brasileira de grande importância, tornou-se conhecida pela pilocarpina e pelo trabalho de comunidades extrativistas. Sua história também fala de biodiversidade, conhecimento tradicional e proteção de espécies nativas.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Vitalidade</span><span>Movimento</span><span>Respeito</span><span>Potência</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>O que precisa ser revitalizado em sua vida?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> É uma planta de ação potente.</p>
+  </article></div>
+        <span class="page-number">6</span>
+      </div>
+    </section>
+<section class="page herb-page" id="urucum">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Urucum • Bixa orellana</p>
+    <h3>Urucum</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>Abrir um fruto de urucum é encontrar pequenas sementes cobertas por um vermelho vivo. A cor permanece nos dedos e transforma o toque em marca, presença e memória. É uma planta que parece dizer: eu estive aqui.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Ritual de cor e intenção</h4>
+      <ul class="ingredients"><li>Algumas sementes de urucum</li><li>Um pequeno pedaço de papel ou tecido natural</li></ul>
+      <p>Toque levemente as sementes e use o pigmento para traçar uma palavra, um ponto ou um pequeno símbolo. Faça isso como gesto de identidade e intenção, sem reproduzir pinturas ou grafismos sagrados de povos indígenas.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>É usado principalmente como alimento, corante e elemento cultural.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>O urucum está ligado à alimentação, ao artesanato e a práticas corporais de diferentes povos indígenas. Cada povo possui seus próprios significados; aproximar-se dessa planta também pede reverência às culturas que preservam seus saberes.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Identidade</span><span>Ancestralidade</span><span>Cor</span><span>Proteção</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>Quais raízes ajudam você a reconhecer quem é?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Uso culinário não é equivalente a uso medicinal concentrado.</p>
+  </article></div>
+        <span class="page-number">7</span>
+      </div>
+    </section>
+<section class="page herb-page" id="assa-peixe">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Assa-peixe • Vernonanthura polyanthes</p>
+    <h3>Assa-peixe</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>O assa-peixe carrega a rusticidade das plantas que crescem sem pedir licença. Suas folhas claras, quase prateadas quando vistas de longe, e suas flores visitadas por abelhas trazem uma sensação de campo aberto e cuidado simples.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Presença no quintal</h4>
+      
+      <p>Observe a planta viva, especialmente quando estiver florida. Perceba as abelhas, o movimento do vento e a textura de suas folhas sem esfregá-las na pele. O ritual aqui é reconhecer a rede de vida que se forma ao redor de uma planta.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>Na medicina popular brasileira é lembrado para tosse, catarro e desconfortos respiratórios.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Muito conhecido em áreas rurais brasileiras, o assa-peixe aparece em memórias de infusões caseiras e na produção de um mel valorizado. É uma planta de beira de estrada, pasto e quintal, próxima da vida cotidiana.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Acolhimento</span><span>Simplicidade</span><span>Resistência</span><span>Cuidado</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>Como você tem cuidado de si nos dias difíceis?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Nomes populares podem indicar plantas diferentes.</p>
+  </article></div>
+        <span class="page-number">8</span>
+      </div>
+    </section>
+<section class="page herb-page" id="espinheira-santa">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Espinheira-santa • Monteverdia ilicifolia</p>
+    <h3>Espinheira-santa</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>Suas folhas brilhantes terminam em pequenos espinhos, unindo delicadeza e defesa. A espinheira-santa desperta a sensação de um limite que não agride, mas protege aquilo que precisa permanecer inteiro.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Ritual dos limites</h4>
+      <ul class="ingredients"><li>Uma folha caída ou uma imagem da planta</li><li>Papel e lápis</li></ul>
+      <p>Observe o contorno da folha e seus espinhos. Escreva uma coisa que merece ser acolhida e outra que já não deve atravessar seus limites. Guarde o papel por alguns dias como lembrança de uma proteção consciente.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>É tradicionalmente indicada para aliviar má digestão, sensação de estômago cheio e azia leve.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Presente em saberes do Sul do Brasil e em práticas fitoterápicas, tornou-se uma das plantas medicinais mais conhecidas do país. Sua história também ensina a importância de reconhecer a espécie verdadeira.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Proteção</span><span>Equilíbrio</span><span>Limite</span><span>Serenidade</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>O que sua vida está tentando equilibrar neste momento?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Evite automedicação, especialmente na gestação e amamentação.</p>
+  </article></div>
+        <span class="page-number">9</span>
+      </div>
+    </section>
+<section class="page herb-page" id="alho">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Alho • Allium sativum</p>
+    <h3>Alho</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>O alho se anuncia antes de ser visto. Seu aroma forte ocupa a cozinha, desperta o corpo e permanece nas mãos. Sob a casca fina, cada dente guarda uma intensidade que transformou esse alimento em símbolo de força.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Proteção da cozinha</h4>
+      <ul class="ingredients"><li>1 cabeça de alho</li><li>Um pequeno prato ou cesta</li></ul>
+      <p>Em vez de levar o alho à pele, deixe uma cabeça inteira em um canto seco da cozinha por um dia, como símbolo de proteção e fartura. Depois, use normalmente no preparo dos alimentos, devolvendo o ritual à vida cotidiana.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>Além do uso alimentar, aparece em fitoterapia como auxiliar em alguns cuidados cardiovasculares e metabólicos.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Há séculos o alho atravessa cozinhas e crenças de diferentes culturas. No Brasil, chegou às panelas, às histórias de proteção da casa e aos conselhos transmitidos por mães e avós.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Força</span><span>Proteção</span><span>Vitalidade</span><span>Defesa</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>O que você precisa fortalecer dentro de si?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Quantidades culinárias diferem de extratos concentrados.</p>
+  </article></div>
+        <span class="page-number">10</span>
+      </div>
+    </section>
+<section class="page herb-page" id="guaco">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Guaco • Mikania glomerata / Mikania laevigata</p>
+    <h3>Guaco</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>O guaco sobe, envolve e procura espaço. Como trepadeira, cria caminhos por cercas e suportes; quando suas folhas são amassadas, liberam um aroma marcante que lembra quintal depois da chuva.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Ritual de espaço e respiração</h4>
+      <ul class="ingredients"><li>Um ramo de guaco em um vaso com água</li><li>Uma janela aberta</li></ul>
+      <p>Coloque o ramo próximo a uma janela e observe a forma como a planta se estende. Respire o ar do ambiente sem inalar vapores concentrados. Use esse momento para abrir a casa e deixar o vento circular.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>É tradicionalmente usado como expectorante e auxiliar no alívio da tosse associada a resfriados.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>É uma das plantas mais lembradas nas tradições brasileiras ligadas a xaropes e cuidados respiratórios. Nos quintais, sua forma de crescer também a transformou em imagem de expansão e abertura.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Expansão</span><span>Abertura</span><span>Movimento</span><span>Liberdade</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>O que impede você de respirar mais livremente a própria vida?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Pode interagir com medicamentos e não deve ser usado de forma prolongada sem orientação profissional.</p>
+  </article></div>
+        <span class="page-number">11</span>
+      </div>
+    </section>
+<section class="page herb-page" id="quebra-pedra">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Quebra-pedra • Phyllanthus spp.</p>
+    <h3>Quebra-pedra</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>Pequeno e discreto, o quebra-pedra nasce em frestas, calçadas e terrenos onde quase ninguém espera encontrar delicadeza. Sua presença ensina que força nem sempre faz barulho.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Caminhada de observação</h4>
+      
+      <p>Procure a planta sem arrancá-la. Aproxime-se do chão, observe suas pequenas folhas e perceba o lugar improvável onde escolheu crescer. Deixe que a descoberta seja o próprio ritual.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>É usado tradicionalmente para aumentar o fluxo urinário e em queixas urinárias.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Seu nome popular atravessou o Brasil ligado a preparações para as vias urinárias. Ao mesmo tempo, a imagem de romper pedras fez da planta um símbolo espontâneo de caminhos que se abrem.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Superação</span><span>Persistência</span><span>Caminhos</span><span>Delicadeza</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>Qual pedra emocional você está pronta para deixar para trás?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Problemas urinários ou renais exigem avaliação médica.</p>
+  </article></div>
+        <span class="page-number">12</span>
+      </div>
+    </section>
+<section class="page herb-page" id="folha-de-amora">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Folha de amora • Morus alba / Morus nigra</p>
+    <h3>Folha de amora</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>A amoreira muda com as estações. Suas folhas amplas criam sombra, enquanto os frutos passam do claro ao escuro até atingirem a doçura. Ela carrega o ritmo da maturação sem pressa.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Banho dos ciclos</h4>
+      <ul class="ingredients"><li>1 litro de água</li><li>3 folhas de amoreira limpas</li></ul>
+      <p>Aqueça a água, desligue o fogo e coloque as folhas. Depois de alguns minutos, coe e deixe amornar. O banho do pescoço para baixo pode acompanhar momentos de mudança, despedida ou acolhimento de uma nova fase.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>É popularmente procurada para ondas de calor da menopausa e controle da glicemia.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>A amoreira vive em quintais e calçadas, oferecendo sombra, fruto e lembranças de infância. Mais recentemente, suas folhas também se aproximaram das conversas sobre maturidade e ciclos femininos.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Maturidade</span><span>Ciclos</span><span>Transformação</span><span>Acolhimento</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>Que fase da sua vida pede mais acolhimento e compreensão?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> As evidências variam conforme espécie e preparação.</p>
+  </article></div>
+        <span class="page-number">13</span>
+      </div>
+    </section>
+<section class="page herb-page" id="pitanga">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Pitanga • Eugenia uniflora</p>
+    <h3>Pitanga</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>A pitanga tem cheiro de folha amassada, fruta madura e quintal aquecido pelo sol. Seu vermelho intenso e seus gomos delicados despertam alegria, pertencimento e uma memória que parece brasileira antes mesmo de receber nome.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Banho de renovação do quintal</h4>
+      <ul class="ingredients"><li>1 litro de água</li><li>Um pequeno punhado de folhas de pitangueira</li></ul>
+      <p>Desligue o fogo quando a água levantar fervura, acrescente as folhas e abafe por alguns minutos. Coe, deixe amornar e use do pescoço para baixo como gesto de renovação e proteção da casa interior.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>O fruto é alimento.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Nativa do Brasil, a pitangueira acompanha jardins, praças e quintais. É árvore de fruto, sombra e memória afetiva, transmitindo uma sensação de abundância que nasce do que está perto.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Pertencimento</span><span>Alegria</span><span>Prosperidade</span><span>Renovação</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>Que lembrança devolve você ao lugar onde se sente inteira?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> O consumo do fruto como alimento é diferente de preparações concentradas com folhas ou extratos.</p>
+  </article></div>
+        <span class="page-number">14</span>
+      </div>
+    </section>
+<section class="page herb-page" id="babosa">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Babosa • Aloe vera</p>
+    <h3>Babosa</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>A babosa guarda água dentro de si. Sob a casca firme existe um gel fresco, transparente e silencioso. Tocá-lo é perceber uma planta que atravessa o calor protegendo sua própria reserva.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Contemplação da reserva</h4>
+      <ul class="ingredients"><li>Uma folha de babosa no vaso ou jardim</li><li>Um copo de água para beber</li></ul>
+      <p>Observe a espessura da folha e a forma como a planta armazena o que precisa. Beba lentamente seu copo de água e pense no que também merece ser preservado em você. Não corte a folha para este ritual.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>O gel transparente aparece em produtos tópicos para hidratação e cuidado de pequenas irritações e queimaduras superficiais.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Cultivada em vasos e quintais, a babosa costuma ser passada de uma casa para outra junto com histórias sobre pele, cabelo e proteção. É uma presença doméstica de resistência e regeneração.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Regeneração</span><span>Reserva</span><span>Proteção</span><span>Paciência</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>Que parte sua precisa de cuidado constante, e não de pressa?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> O gel e o látex da planta têm perfis distintos.</p>
+  </article></div>
+        <span class="page-number">15</span>
+      </div>
+    </section>
+<section class="page herb-page" id="ora-pro-nobis">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Ora-pro-nóbis • Pereskia aculeata</p>
+    <h3>Ora-pro-nóbis</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>Entre espinhos e folhas macias, a ora-pro-nóbis oferece alimento. Seu verde simples cresce sobre muros e cercas, lembrando que abundância pode ter a aparência de algo cotidiano.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Ritual de alimento e gratidão</h4>
+      <ul class="ingredients"><li>Folhas de ora-pro-nóbis corretamente identificadas</li><li>Uma receita de família</li></ul>
+      <p>Escolha uma preparação simples, como refogado, sopa ou omelete. Lave e cozinhe as folhas e sirva a comida com presença. Antes da primeira garfada, reconheça o caminho entre terra, quintal e mesa.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>É uma planta alimentícia usada em refogados, sopas e outras preparações, valorizada por fibras, proteínas e micronutrientes.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Muito ligada à cozinha mineira e aos quintais antigos, a planta reúne nutrição, memória e criatividade popular. Seu nome também carrega histórias de colheitas próximas a igrejas.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Nutrição</span><span>Fartura</span><span>Gratidão</span><span>Simplicidade</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>O que é simples, mas sustenta profundamente a sua vida?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Use como alimento somente quando houver identificação segura e manejo adequado.</p>
+  </article></div>
+        <span class="page-number">16</span>
+      </div>
+    </section>
+<section class="page chapter-page world"><div class="page-inner">
+  <p class="eyebrow">Parte II</p>
+  <h2>Ervas que cruzaram caminhos e culturas</h2>
+  <p>Algumas plantas chegaram ao Brasil por viagens, trocas e migrações. Foram acolhidas em cozinhas e quintais até se tornarem familiares. Outras são conhecidas em muitos países, cada qual com seus próprios gestos e significados.</p>
+  <p>A presença delas nos lembra que plantas também viajam. Cruzam mares, cozinhas e gerações, ganhando novas histórias sem perder a memória dos lugares de onde vieram.</p>
+  <div class="chapter-list">Valeriana • Sálvia • Alecrim • Camomila • Melissa • Capim-limão • Hortelã • Manjericão • Boldo • Carqueja • Calêndula • Lavanda • Dente-de-leão • Gengibre • Cúrcuma • Hibisco</div>
+  <span class="page-number">17</span>
+</div></section>
+<section class="page herb-page" id="valeriana">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Valeriana • Valeriana officinalis</p>
+    <h3>Valeriana</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>A valeriana pertence ao fim do dia. Sua raiz tem odor terroso e profundo, distante dos perfumes delicados, como se conduzisse a atenção para baixo e lembrasse o corpo de repousar.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Preparação do repouso</h4>
+      <ul class="ingredients"><li>Um produto aromático de valeriana próprio para uso</li><li>Luz baixa e silêncio</li></ul>
+      <p>Reduza as luzes, afaste o telefone e permita que o aroma permaneça discretamente no ambiente. O gesto não precisa produzir sono imediatamente; ele apenas marca a passagem entre atividade e recolhimento.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>É usada em fitoterapia para tensão nervosa leve e dificuldade ocasional para dormir.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Conhecida em tradições europeias e na fitoterapia contemporânea, a valeriana atravessou séculos ligada ao descanso. Sua raiz lembra que nem toda planta de cuidado precisa ter perfume agradável.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Repouso</span><span>Aterramento</span><span>Silêncio</span><span>Recolhimento</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>Sua mente tem recebido o descanso que merece?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Pode causar sonolência.</p>
+  </article></div>
+        <span class="page-number">18</span>
+      </div>
+    </section>
+<section class="page herb-page" id="salvia">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Sálvia • Salvia officinalis</p>
+    <h3>Sálvia</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>A sálvia tem folhas aveludadas e um aroma seco, verde e penetrante. Ao tocá-la, os dedos guardam seu perfume por algum tempo, como uma lembrança que insiste em permanecer.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Banho de clareza</h4>
+      <ul class="ingredients"><li>1 litro de água</li><li>Um pequeno punhado de folhas de sálvia culinária</li></ul>
+      <p>Aqueça a água, desligue o fogo e acrescente as folhas. Abafe, coe e espere amornar. Use do pescoço para baixo em momentos de encerramento, limpeza da mente e preparação para uma nova escolha.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>É tradicionalmente usada para desconfortos digestivos leves, suor excessivo e inflamações leves de boca e garganta em preparações apropriadas.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>A sálvia atravessa cozinhas, jardins medicinais e cerimônias de muitos lugares. Cada espécie e cada povo possuem usos próprios; conhecer o nome da planta é parte do respeito à tradição.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Sabedoria</span><span>Clareza</span><span>Purificação</span><span>Encerramento</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>O que você aprendeu que merece permanecer com você?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Óleo essencial e extratos concentrados não equivalem ao uso culinário.</p>
+  </article></div>
+        <span class="page-number">19</span>
+      </div>
+    </section>
+<section class="page herb-page" id="alecrim">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Alecrim • Salvia rosmarinus</p>
+    <h3>Alecrim</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>O alecrim parece carregar a luz da manhã. Seu aroma fresco atravessa o ambiente com suavidade e desperta uma sensação de clareza, presença e renovação. Basta tocar seus ramos para que o perfume permaneça nas mãos e o jardim pareça mais desperto.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Banho tradicional de renovação</h4>
+      <ul class="ingredients"><li>1 litro de água</li><li>2 pequenos punhados de alecrim fresco</li></ul>
+      <p>Após a água levantar fervura, desligue o fogo e acrescente os ramos. Deixe descansar por alguns minutos, coe e espere amornar. Muitas pessoas usam o banho do pescoço para baixo depois do banho habitual, como gesto simbólico de renovação e recomeço.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>É usado tradicionalmente para má digestão leve e, externamente, em produtos para desconforto muscular e circulação superficial.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>O alecrim atravessa gerações. É comum encontrá-lo próximo a hortas, cozinhas e jardins de ervas. Em tradições populares brasileiras, benzedeiras e guardiãs dos saberes da terra o associam à proteção, ao fortalecimento dos caminhos e à clareza dos pensamentos.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Clareza</span><span>Proteção</span><span>Luz</span><span>Coragem</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>O que em sua vida está pedindo um novo começo?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> O uso culinário é diferente do óleo essencial, que não deve ser ingerido por conta própria.</p>
+  </article></div>
+        <span class="page-number">20</span>
+      </div>
+    </section>
+<section class="page herb-page" id="camomila">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Camomila • Matricaria chamomilla</p>
+    <h3>Camomila</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>As pequenas flores da camomila parecem guardar um sol em miniatura. Seu perfume doce e herbáceo cria uma atmosfera de colo, fim de tarde e conversa em voz baixa.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Banho de acolhimento</h4>
+      <ul class="ingredients"><li>1 litro de água</li><li>2 colheres de flores secas de camomila</li></ul>
+      <p>Desligue o fogo quando a água ferver, acrescente as flores e abafe por alguns minutos. Coe com cuidado e use morno do pescoço para baixo, ou apenas nos pés, em noites que pedem suavidade.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>É tradicionalmente usada para desconfortos digestivos leves, cólicas, irritações de boca e pele e como apoio ao relaxamento.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Presente em infusões, compressas e cuidados domésticos, a camomila costuma chegar pela mão de alguém que deseja acalmar. É uma das plantas mais reconhecidas na memória afetiva do cuidado.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Paz</span><span>Acolhimento</span><span>Delicadeza</span><span>Sono</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>Você consegue receber delicadeza sem sentir que precisa merecê-la?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Pode provocar alergia em pessoas sensíveis a plantas da família Asteraceae e interagir com medicamentos.</p>
+  </article></div>
+        <span class="page-number">21</span>
+      </div>
+    </section>
+<section class="page herb-page" id="melissa">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Melissa • Melissa officinalis</p>
+    <h3>Melissa</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>Ao ser tocada, a melissa libera um perfume que lembra limão, mas chega mais macio. Suas folhas parecem refrescar sem despertar demais, criando um meio-termo entre presença e descanso.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Banho de harmonia</h4>
+      <ul class="ingredients"><li>1 litro de água</li><li>Um punhado de folhas frescas de melissa</li></ul>
+      <p>Aqueça a água, desligue o fogo e coloque as folhas. Abafe, coe e deixe amornar. Use do pescoço para baixo quando quiser diminuir o ruído do dia e devolver suavidade ao ambiente interior.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>É usada para estresse leve, dificuldade ocasional de dormir, gases e desconforto digestivo.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Conhecida também como erva-cidreira verdadeira, a melissa ocupa jardins aromáticos e antigas tradições domésticas. Seu perfume fez dela companhia de momentos de inquietação e reconciliação.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Harmonia</span><span>Serenidade</span><span>Afeto</span><span>Reconciliação</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>O que pode ser reorganizado com suavidade, em vez de força?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Confirme a espécie: erva-cidreira é um nome compartilhado.</p>
+  </article></div>
+        <span class="page-number">22</span>
+      </div>
+    </section>
+<section class="page herb-page" id="capim-limao">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Capim-limão • Cymbopogon citratus</p>
+    <h3>Capim-limão</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>As folhas longas do capim-limão dançam com o vento e cortam o ar com um perfume cítrico quando amassadas. Seu aroma parece abrir janelas por dentro.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Escalda-pés de leveza</h4>
+      <ul class="ingredients"><li>2 litros de água morna</li><li>Um punhado de folhas de capim-limão cortadas</li></ul>
+      <p>Faça uma infusão, coe e coloque em uma bacia confortável. Mergulhe os pés por alguns minutos enquanto respira o aroma que sobe da água. Use o momento para deixar o excesso do dia perder peso.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>É usado popularmente para tensão leve, sono, gases e cólicas digestivas discretas.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Chamado também de capim-santo ou erva-cidreira em muitas regiões, é presença comum em quintais brasileiros. Cresce em touceiras, perfuma a casa e acompanha pausas simples.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Leveza</span><span>Limpeza</span><span>Tranquilidade</span><span>Movimento</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>Que excesso está ocupando o espaço da sua leveza?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Não confunda o chá doméstico com óleo essencial concentrado.</p>
+  </article></div>
+        <span class="page-number">23</span>
+      </div>
+    </section>
+<section class="page herb-page" id="hortela">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Hortelã • Mentha spp.</p>
+    <h3>Hortelã</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>A hortelã chega como vento fresco. Seu perfume sobe rapidamente, desperta os sentidos e deixa nas mãos uma sensação verde e limpa.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Banho de frescor</h4>
+      <ul class="ingredients"><li>1 litro de água</li><li>Um punhado de folhas frescas de hortelã</li></ul>
+      <p>Aqueça a água, desligue o fogo e acrescente as folhas levemente tocadas entre as mãos. Coe, deixe amornar e use do pescoço para baixo em dias quentes ou momentos que pedem movimento e renovação.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>É usada para gases, digestão lenta e sensação de estômago pesado.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Presente em hortas, vasos, chás e cozinhas, a hortelã atravessa muitas culturas. Sua facilidade de se espalhar fez dela uma imagem viva de circulação e abundância.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Frescor</span><span>Movimento</span><span>Prosperidade</span><span>Clareza</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>O que precisa voltar a circular dentro de você?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Espécies e concentrações mudam os efeitos.</p>
+  </article></div>
+        <span class="page-number">24</span>
+      </div>
+    </section>
+<section class="page herb-page" id="manjericao">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Manjericão • Ocimum basilicum</p>
+    <h3>Manjericão</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>O manjericão perfuma o ar antes mesmo de chegar à panela. Suas folhas macias carregam calor, alegria e a sensação de uma casa onde existe comida sendo preparada.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Banho de prosperidade</h4>
+      <ul class="ingredients"><li>1 litro de água</li><li>Um punhado de folhas de manjericão</li></ul>
+      <p>Desligue o fogo após a água ferver e acrescente as folhas. Abafe, coe e deixe amornar. Use do pescoço para baixo como gesto de proteção, hospitalidade e abertura para o que deseja florescer.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>É antes de tudo uma erva culinária.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Cultivado junto às casas, o manjericão une cozinha, jardim e espiritualidade. No Brasil, aparece em diferentes tradições de proteção, bênção e prosperidade.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Prosperidade</span><span>Proteção</span><span>Alegria</span><span>Hospitalidade</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>Que presença faz sua casa interior parecer mais acolhedora?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Uso alimentar é diferente de extratos e óleos essenciais concentrados.</p>
+  </article></div>
+        <span class="page-number">25</span>
+      </div>
+    </section>
+<section class="page herb-page" id="boldo">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Boldo • Peumus boldus / Plectranthus spp.</p>
+    <h3>Boldo</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>O boldo tem folhas espessas e um amargor que parece acordar a boca inteira. Seu cheiro lembra quintal, conselho de família e aqueles cuidados que não tentam ser doces.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Banho tradicional de descarrego</h4>
+      <ul class="ingredients"><li>1 litro de água</li><li>3 folhas de boldo corretamente identificado</li></ul>
+      <p>Amasse suavemente as folhas na água em temperatura ambiente ou morna, coe e use do pescoço para baixo. Em tradições populares, esse banho acompanha momentos de cansaço, peso e necessidade de limpeza.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>Diferentes espécies chamadas boldo são usadas para má digestão e sensação de estômago pesado.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Quase toda família conhece um boldo, mas nem sempre conhece a mesma espécie. Ele atravessa quintais brasileiros em infusões amargas e saberes transmitidos pela observação.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Limpeza</span><span>Desapego</span><span>Proteção</span><span>Recuperação</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>O que você ainda está tentando digerir emocionalmente?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Não use sem saber qual espécie possui.</p>
+  </article></div>
+        <span class="page-number">26</span>
+      </div>
+    </section>
+<section class="page herb-page" id="carqueja">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Carqueja • Baccharis trimera</p>
+    <h3>Carqueja</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>A carqueja cresce em hastes verdes e angulosas, com aparência firme e sabor intensamente amargo. Ela desperta a sensação de corte, decisão e retorno ao essencial.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Ritual de corte simbólico</h4>
+      <ul class="ingredients"><li>Um ramo seco de carqueja</li><li>Papel e barbante</li></ul>
+      <p>Escreva no papel um excesso que deseja interromper. Enrole-o sem apertar no ramo e deixe-o por uma noite em local seco. No dia seguinte, retire o papel e descarte-o. Não é necessário aplicar a planta sobre a pele.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>É usada popularmente para má digestão e queixas do fígado.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Muito presente no Sul e Sudeste do Brasil, a carqueja acompanha infusões populares e paisagens rurais. Seu amargor ajudou a construir sua associação com depuração e firmeza.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Limites</span><span>Firmeza</span><span>Corte</span><span>Essencial</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>Que limite pode tornar sua vida mais clara?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Pode interferir na pressão ou glicemia.</p>
+  </article></div>
+        <span class="page-number">27</span>
+      </div>
+    </section>
+<section class="page herb-page" id="calendula">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Calêndula • Calendula officinalis</p>
+    <h3>Calêndula</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>A calêndula abre flores em tons de ouro e laranja, como pequenos círculos de luz. Suas pétalas parecem aquecer o olhar e transformar delicadeza em presença.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Banho dourado de delicadeza</h4>
+      <ul class="ingredients"><li>1 litro de água</li><li>Um pequeno punhado de pétalas secas de calêndula</li></ul>
+      <p>Faça uma infusão suave, coe muito bem e deixe amornar. Use nos braços e pernas ou em um escalda-pés como gesto de acolhimento, continuidade e cuidado com a própria pele.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>É usada externamente em produtos para inflamações leves da pele, pequenas feridas e irritações superficiais.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Cultivada em jardins e usada em preparações externas tradicionais, a calêndula atravessa a história ligada ao cuidado da pele. Sua cor também a aproximou de símbolos solares.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Luz</span><span>Cicatrização</span><span>Alegria</span><span>Continuidade</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>O que está cicatrizando mesmo quando você ainda não percebe?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Pode causar alergia em pessoas sensíveis à família Asteraceae.</p>
+  </article></div>
+        <span class="page-number">28</span>
+      </div>
+    </section>
+<section class="page herb-page" id="lavanda">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Lavanda • Lavandula angustifolia</p>
+    <h3>Lavanda</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>A lavanda cria silêncio ao redor. Seu perfume floral e limpo lembra roupas guardadas com cuidado, travesseiros frescos e campos onde o olhar pode descansar.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Banho de quietude</h4>
+      <ul class="ingredients"><li>1 litro de água</li><li>1 colher de flores secas de lavanda</li></ul>
+      <p>Prepare uma infusão leve, coe e deixe amornar. Use do pescoço para baixo ou em um escalda-pés no fim do dia. Diminua as luzes e permita que o aroma marque o início do repouso.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>É usada em aromaterapia e fitoterapia para estresse leve, inquietação e dificuldade ocasional para dormir.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Há muito tempo a lavanda perfuma casas, tecidos, águas de banho e jardins. Sua presença atravessa o cuidado cotidiano e rituais de purificação suave.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Paz</span><span>Repouso</span><span>Purificação</span><span>Harmonia</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>Como seria descansar sem transformar a pausa em culpa?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Óleo essencial é concentrado e não deve ser ingerido.</p>
+  </article></div>
+        <span class="page-number">29</span>
+      </div>
+    </section>
+<section class="page herb-page" id="dente-de-leao">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Dente-de-leão • Taraxacum officinale</p>
+    <h3>Dente-de-leão</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>Primeiro vem a flor amarela; depois, uma esfera leve que o vento transforma em caminho. O dente-de-leão muda diante dos olhos e convida a tocar o instante sem tentar segurá-lo.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Ritual do desejo ao vento</h4>
+      <ul class="ingredients"><li>Uma flor madura encontrada em local permitido</li><li>Um desejo escrito em poucas palavras</li></ul>
+      <p>Leia seu desejo em silêncio e sopre as sementes em local onde a planta já cresça naturalmente, sem introduzi-la em áreas protegidas. Observe a dispersão sem exigir que o vento siga uma direção.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>É tradicionalmente usado para perda temporária de apetite, digestão lenta e aumento do fluxo urinário.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Conhecido em muitos países como alimento, planta tradicional e brincadeira de infância, tornou-se um dos maiores símbolos de desejo, liberdade e persistência.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Liberdade</span><span>Desejo</span><span>Persistência</span><span>Novos caminhos</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>Em que lugar improvável você aprendeu a florescer?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Pode interagir com medicamentos e não é indicado para todas as condições biliares ou renais.</p>
+  </article></div>
+        <span class="page-number">30</span>
+      </div>
+    </section>
+<section class="page herb-page" id="gengibre">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Gengibre • Zingiber officinale</p>
+    <h3>Gengibre</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>O gengibre aquece antes mesmo de ser provado. Seu perfume picante sobe rapidamente e parece acender o corpo, como uma pequena brasa guardada sob a terra.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Escalda-pés de coragem</h4>
+      <ul class="ingredients"><li>2 litros de água morna</li><li>2 ou 3 fatias finas de gengibre</li></ul>
+      <p>Deixe as fatias na água por poucos minutos, retire-as e teste a temperatura. Mergulhe os pés brevemente, sem esfregar o gengibre na pele. O calor suave pode acompanhar uma intenção de movimento e coragem.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>É bem conhecido para náusea, inclusive de movimento, e para desconfortos digestivos leves.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Originário da Ásia, o gengibre viajou por cozinhas, rotas comerciais e sistemas tradicionais de cuidado. No Brasil, ganhou lugar em festas, bebidas, receitas e gestos de aquecimento.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Coragem</span><span>Calor</span><span>Impulso</span><span>Movimento</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>Que coragem precisa voltar a aquecer seus passos?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Doses culinárias diferem de suplementos.</p>
+  </article></div>
+        <span class="page-number">31</span>
+      </div>
+    </section>
+<section class="page herb-page" id="curcuma">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Cúrcuma • Curcuma longa</p>
+    <h3>Cúrcuma</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>A cúrcuma guarda um sol dentro da raiz. Ao ser cortada, revela um laranja intenso que colore mãos, tecidos e alimentos. Sua presença é luminosa e impossível de esconder.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Ritual de luz na cozinha</h4>
+      <ul class="ingredients"><li>Uma pequena quantidade de cúrcuma culinária</li><li>Arroz, legumes ou outra receita clara</li></ul>
+      <p>Acrescente a cúrcuma ao alimento e observe a cor se espalhar lentamente. Enquanto mistura, escolha uma qualidade que deseja alimentar em sua vida. Aqui, o encontro acontece na cozinha, não no banho.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>É usada como alimento e, em fitoterapia, para desconfortos digestivos; extratos específicos também são estudados para dor articular.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Profundamente ligada às culturas do sul da Ásia, a cúrcuma participa de alimentos, celebrações e ritos de passagem. Aproximar-se dela pede reconhecimento dessa história viva.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Luz</span><span>Prosperidade</span><span>Transformação</span><span>Celebração</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>Que parte da sua vida pede mais luz e menos pressa?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Suplementos concentrados podem interagir com medicamentos e não são equivalentes ao tempero alimentar.</p>
+  </article></div>
+        <span class="page-number">32</span>
+      </div>
+    </section>
+<section class="page herb-page" id="hibisco">
+      <div class="page-inner">
+        <p class="eyebrow">Encontro com a planta</p>
+        <div class="herb-single"><article class="herb-card">
+    <p class="latin">Hibisco • Hibiscus sabdariffa</p>
+    <h3>Hibisco</h3>
+    <section class="herb-section sensation">
+      <h4>Sensação que desperta</h4>
+      <p>O hibisco chama o olhar. Suas flores abertas e seus cálices vermelhos trazem intensidade, movimento e uma beleza que não tenta ser discreta.</p>
+    </section>
+    <section class="herb-section ritual">
+      <h4>Banho de presença e beleza</h4>
+      <ul class="ingredients"><li>1 litro de água</li><li>Um pequeno punhado de hibisco seco</li></ul>
+      <p>Prepare uma infusão, coe e deixe esfriar completamente. Use do pescoço para baixo como gesto de presença, autoestima e renovação. A cor pode manchar tecidos claros, por isso escolha a toalha com cuidado.</p>
+    </section>
+    <section class="herb-section traditional">
+      <h4>Na tradição do cuidado</h4>
+      <p>Os cálices são usados em bebidas.</p>
+    </section>
+    <section class="herb-section heritage">
+      <h4>Quintais, caminhos e memórias</h4>
+      <p>Cultivado em diferentes regiões do mundo, o hibisco aparece em bebidas, jardins e símbolos de beleza. No imaginário espiritual, aproxima-se do amor, do magnetismo e da força do feminino.</p>
+    </section>
+    <section class="spiritual">
+      <h4>Significado espiritual</h4>
+      <p><span>Beleza</span><span>Magnetismo</span><span>Amor</span><span>Renovação</span></p>
+    </section>
+    <blockquote class="plant-question"><span>Pergunta da planta</span>Que beleza você pode viver sem precisar fazê-la durar para sempre?</blockquote>
+    <p class="care"><strong>Nota de cuidado:</strong> Pode influenciar pressão e glicemia.</p>
+  </article></div>
+        <span class="page-number">33</span>
+      </div>
+    </section>
+<section class="page text-page"><div class="page-inner">
+  <p class="eyebrow">Banhos de ervas</p>
+  <h2>Transformar água em presença</h2>
+  <p>Um banho de ervas começa antes da água tocar o corpo. Começa na escolha da planta, no aroma que se abre, no som da água e na intenção colocada naquele momento.</p>
+  <ol class="practice">
+    <li><strong>Escolha.</strong> Aproxime-se de uma planta conhecida e corretamente identificada. Perceba por que ela chamou você naquele dia.</li>
+    <li><strong>Prepare.</strong> Em geral, aqueça a água, desligue o fogo, acrescente a erva e abafe. Folhas delicadas não precisam ser cozidas.</li>
+    <li><strong>Espere.</strong> Enquanto a água amorna, observe a mudança de cor e aroma. Coe com cuidado.</li>
+    <li><strong>Receba.</strong> Depois do banho habitual, despeje lentamente do pescoço para baixo ou faça um escalda-pés.</li>
+    <li><strong>Encerre.</strong> Permaneça alguns minutos em silêncio. Agradeça à planta e descarte os restos vegetais com respeito.</li>
+  </ol>
+  <div class="safety">Use somente de forma externa, nunca aplique óleo essencial puro na água e interrompa diante de ardor ou irritação. Gestantes, crianças e pessoas com pele sensível precisam de orientação individual.</div>
+  <span class="page-number">34</span>
+</div></section>
+<section class="page text-page"><div class="page-inner">
+  <p class="eyebrow">Um espaço vivo</p>
+  <h2>Como criar seu próprio canto de ervas</h2>
+  <p>Não é necessário ter um grande jardim. Um vaso de alecrim perto da janela, uma hortelã recebendo sol ou um manjericão ao lado da cozinha já podem mudar a relação com a casa.</p>
+  <div class="three-columns">
+    <article><h3>Observe</h3><p>Aprenda o ritmo da planta: quanta água pede, como reage à luz e quando oferece folhas novas.</p></article>
+    <article><h3>Toque</h3><p>Sinta textura e perfume sem arrancar por hábito. Colha somente o que será usado.</p></article>
+    <article><h3>Registre</h3><p>Anote cheiros, mudanças, lembranças e histórias de quem ensinou você a reconhecê-la.</p></article>
+  </div>
+  <p>Com o tempo, o canto deixa de ser decoração. Ele se torna calendário, companhia e forma de perceber a passagem das estações.</p>
+  <blockquote>Cuidar de uma planta também ensina a permanecer.</blockquote>
+  <span class="page-number">35</span>
+</div></section>
+<section class="page text-page references-page"><div class="page-inner">
+  <p class="eyebrow">Raízes da pesquisa</p>
+  <h2>Para continuar caminhando</h2>
+  <p>Este herbário reúne memória cultural, sentidos simbólicos e formas de uso tradicional. Os significados espirituais variam entre regiões, famílias, terreiros, povos e comunidades. Nenhuma lista consegue encerrar uma tradição viva.</p>
+  <ul>
+    <li>Agência Nacional de Vigilância Sanitária. <em>Memento Fitoterápico da Farmacopeia Brasileira</em>.</li>
+    <li>Agência Nacional de Vigilância Sanitária. <em>Formulário de Fitoterápicos da Farmacopeia Brasileira</em>, 2ª edição, atualizado em dezembro de 2024.</li>
+    <li>Ministério da Saúde. <em>Política e Programa Nacional de Plantas Medicinais e Fitoterápicos</em>.</li>
+    <li>Fundação Oswaldo Cruz. Conteúdos sobre biodiversidade, etnobotânica e plantas medicinais.</li>
+    <li>Relatos, memórias e práticas de quintais brasileiros, apresentados sem atribuir uma tradição única a todo o país.</li>
+  </ul>
+  <div class="safety">Para ingestão, tratamento de sintomas ou uso durante gestação, amamentação, infância, doenças crônicas e uso de medicamentos, procure orientação qualificada. O nome popular pode se referir a espécies diferentes.</div>
+  <span class="page-number">36</span>
+</div></section>
+<section class="page closing-page"><div class="page-inner">
+  <p class="eyebrow">Carta final</p>
+  <h2>Que as plantas voltem a ser presença.</h2>
+  <p>Que o alecrim desperte a manhã. Que a lavanda anuncie o repouso. Que o manjericão perfume a casa e a pitanga devolva você a algum quintal guardado na memória.</p>
+  <p>Que os banhos não sejam apenas misturas de folhas, mas pausas verdadeiras. Que a água tenha tempo de amornar. Que o aroma encontre espaço. Que a intenção não precise ter pressa.</p>
+  <p>E que, depois destas páginas, você não passe por uma planta da mesma maneira. Talvez reconheça uma textura, procure um nome, toque uma folha com mais delicadeza ou pergunte a alguém mais velho que história conhece sobre ela.</p>
+  <blockquote>O mundo das plantas começa onde a atenção cria raiz.</blockquote>
+  <p class="signature">Lumiara</p>
+  <span class="page-number">37</span>
+</div></section>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const preview = params.get("preview");
+  if (preview) {
+    document.querySelectorAll(".page").forEach((page) => {
+      if (page.id !== preview) page.remove();
+    });
+  }
+  if (params.has("audit")) {
+    const result = [...document.querySelectorAll(".herb-card")].map((card) => ({
+      plant: card.closest(".page").id,
+      hiddenPixels: Math.max(0, card.scrollHeight - card.clientHeight),
+    }));
+    document.body.textContent = JSON.stringify(result);
+  }
+</script>
+</body>
+</html>
