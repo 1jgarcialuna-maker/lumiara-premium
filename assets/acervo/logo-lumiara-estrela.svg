@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="112" viewBox="0 0 520 112" role="img" aria-labelledby="title">
+  <title id="title">Lumiara</title>
+  <g transform="translate(8 8)">
+    <circle cx="48" cy="48" r="46" fill="#172f50"/>
+    <circle cx="48" cy="48" r="35" fill="none" stroke="#efb53f" stroke-width="3"/>
+    <path d="M48 17C43 34 34 43 17 48C34 53 43 62 48 79C53 62 62 53 79 48C62 43 53 34 48 17Z" fill="#efb53f"/>
+    <path d="M48 31C45 40 40 45 31 48C40 51 45 56 48 65C51 56 56 51 65 48C56 45 51 40 48 31Z" fill="#fff8e8"/>
+  </g>
+  <g fill="#172f50" font-family="Arial, sans-serif" font-size="58" font-weight="800">
+    <text x="120" y="76">Lum</text>
+    <text x="242" y="76">ı</text>
+    <text x="260" y="76">ara</text>
+  </g>
+  <path d="M250 10L255 22L267 27L255 32L250 44L245 32L233 27L245 22Z" fill="#efb53f"/>
+  <rect x="122" y="88" width="94" height="5" rx="3" fill="#efb53f"/>
+</svg>
