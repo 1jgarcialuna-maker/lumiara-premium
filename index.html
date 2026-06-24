@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#17130f">
+  <meta name="description" content="Lumiara — curadoria inteligente para uma vida extraordinária.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <title>Lumiara — Curadoria Lumiara</title>
+</head>
+<body>
+  <div class="announcement">
+    <span>Uma seleção. Menos ruído. Mais vida.</span>
+    <button class="announcement-link" data-open-auth>Entrar para o Círculo Lumiara <span>↗</span></button>
+  </div>
+
+  <header class="site-header" id="inicio">
+    <a class="brand" href="#inicio" aria-label="Lumiara, início">
+      <span class="brand-mark">L</span>
+      <span class="brand-word">Lum<span class="star-i">ı<span aria-hidden="true">✦</span></span>ara</span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Navegação principal">
+      <a href="#curadoria">Produtos</a>
+      <a href="#ebooks">Biblioteca</a>
+      <a href="#inspiracoes">Inspirações</a>
+      <a href="#circulo">Círculo</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-button search-trigger" aria-label="Buscar">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+      </button>
+      <button class="icon-button favorites-trigger" aria-label="Favoritos">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.7-7.5 1.1-1.1a5.5 5.5 0 0 0 0-7.8Z"></path></svg>
+        <span class="count-badge" id="favoriteCount">0</span>
+      </button>
+      <button class="member-button" data-open-auth>
+        <span class="member-dot"></span>
+        <span class="member-label">Minha Lumiara</span>
+      </button>
+      <button class="menu-button" aria-label="Abrir menu"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" aria-hidden="true">
+    <button class="mobile-close" aria-label="Fechar menu">×</button>
+    <a href="#curadoria">Curadoria</a>
+    <a href="#ebooks">Biblioteca</a>
+    <a href="#inspiracoes">Inspirações</a>
+    <a href="#circulo">Círculo Lumiara</a>
+    <button data-open-auth>Entrar ou criar conta</button>
+  </div>
+
+  <main>
+    <section class="hero">
+      <img src="assets/hero-lumiara.png" alt="Mesa sofisticada com livro Lumiara, notebook, café e luz ambiente">
+      <div class="hero-shade"></div>
+      <div class="hero-content">
+        <p class="eyebrow light">Curadoria Lumiara · Edição 01</p>
+        <h1>O extraordinário,<br><em>escolhido para você.</em></h1>
+        <p class="hero-copy">Produtos, livros e ideias para deixar a vida mais bonita e prática.</p>
+        <div class="hero-actions">
+          <a class="button button-light" href="#curadoria">Explorar a Lumiara <span>↗</span></a>
+          <button class="text-button light" data-open-auth>Personalizar minha experiência <span>→</span></button>
+        </div>
+      </div>
+      <div class="hero-meta">
+        <span>01</span>
+        <div class="hero-progress"><i></i></div>
+        <span>03</span>
+      </div>
+      <a class="scroll-cue" href="#manifesto"><span>Descobrir</span><i></i></a>
+    </section>
+
+    <section class="manifesto section" id="manifesto">
+      <div>
+        <p class="eyebrow">Para todos os estilos</p>
+        <h2>Encontre o que combina<br><em>com você.</em></h2>
+      </div>
+      <div class="manifesto-copy">
+        <p>A Lumiara reúne produtos, leituras e inspirações para diferentes momentos, gostos e necessidades.</p>
+        <div class="manifesto-stats">
+          <div><strong>Casa</strong><span>conforto e<br>decoração</span></div>
+          <div><strong>Vida</strong><span>bem-estar e<br>rotina</span></div>
+          <div><strong>Ideias</strong><span>livros e<br>inspiração</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="editorial-feature" id="curadoria">
+      <div class="feature-image">
+        <img src="assets/curadoria-produtos.png" alt="Fone, relógio e luminária selecionados pela curadoria Lumiara">
+        <span class="image-index">01 / 03</span>
+      </div>
+      <div class="feature-copy">
+        <p class="eyebrow">Produtos Lumiara</p>
+        <h2>Boas escolhas para<br><em>cada jeito de viver.</em></h2>
+        <p>Casa, lazer, movimento e bem-estar em um só lugar.</p>
+        <a class="arrow-link" href="#produtos">Ver produtos <span>↗</span></a>
+      </div>
+    </section>
+
+    <section class="top-section section" id="produtos">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Explore por ambiente</p>
+          <h2>Seu espaço, do seu jeito.</h2>
+        </div>
+        <p>Escolha uma categoria e descubra os produtos.</p>
+      </div>
+
+      <div class="scene-grid">
+        <button class="scene-card active" data-product-filter="quarto">
+          <img src="assets/acervo/meu-cantinho/meu-cantinho-quarto-lumiara.jpg" alt="Quarto Lumiara">
+          <span>Quarto</span>
+        </button>
+        <button class="scene-card" data-product-filter="sala">
+          <img src="assets/acervo/meu-cantinho/meu-cantinho-sala-lumiara.jpg" alt="Sala Lumiara">
+          <span>Sala</span>
+        </button>
+        <button class="scene-card" data-product-filter="externo">
+          <img src="assets/acervo/meu-cantinho/meu-cantinho-camping-lumiara.jpg" alt="Área externa Lumiara">
+          <span>Área externa</span>
+        </button>
+        <button class="scene-card" data-product-filter="fitness">
+          <img src="assets/inspiracao-lumiara.png" alt="Bem-estar Lumiara">
+          <span>Fitness</span>
+        </button>
+      </div>
+      <div class="real-products" id="realProducts"></div>
+    </section>
+
+    <section class="library" id="ebooks">
+      <div class="library-copy">
+        <p class="eyebrow light">Biblioteca Lumiara</p>
+        <h2>Ideias para<br><em>viver com intenção.</em></h2>
+        <p>Leituras sobre vida, emoções, espiritualidade e novos começos.</p>
+        <div class="library-actions">
+          <a class="button button-gold" href="#livros">Abrir a biblioteca <span>↗</span></a>
+          <span>Livros gratuitos<br>e edições premium</span>
+        </div>
+      </div>
+      <div class="library-image">
+        <img src="assets/colecao-ebooks.png" alt="Coleção editorial de livros Lumiara">
+      </div>
+    </section>
+
+    <section class="books-section section" id="livros">
+      <div class="section-heading compact">
+        <div>
+          <p class="eyebrow">Acervo Lumiara</p>
+          <h2>Escolha sua próxima leitura.</h2>
+        </div>
+        <div class="filters" role="group" aria-label="Filtrar livros">
+          <button class="active" data-filter="todos">Todos</button>
+          <button data-filter="gratuito">Grátis</button>
+          <button data-filter="premium">Premium</button>
+        </div>
+      </div>
+      <div class="book-catalog" id="bookCatalog"></div>
+      <button class="catalog-more" id="showMoreBooks">Ver mais livros <span>↓</span></button>
+    </section>
+
+    <section class="inspiration" id="inspiracoes">
+      <img src="assets/inspiracao-lumiara.png" alt="Ambiente sofisticado e acolhedor com poltrona e luz dourada">
+      <div class="inspiration-overlay"></div>
+      <div class="inspiration-copy">
+        <p class="eyebrow light">Cenas curadas</p>
+        <h2>Uma casa que devolve<br><em>você para você.</em></h2>
+        <p>Pequenas decisões de ambiente que mudam a qualidade dos seus dias.</p>
+        <button class="button button-light scene-button">Entrar nesta cena <span>↗</span></button>
+      </div>
+      <div class="scene-note">
+        <span>Nota da curadoria</span>
+        <p>A luz certa não ilumina apenas o espaço. Ela sinaliza ao corpo que é hora de desacelerar.</p>
+      </div>
+    </section>
+
+    <section class="membership section" id="circulo">
+      <div class="membership-card">
+        <div class="membership-glow"></div>
+        <p class="eyebrow light">Círculo Lumiara</p>
+        <h2>Menos busca.<br><em>Mais descoberta.</em></h2>
+        <p>Salve favoritos, receba novidades e acesse conteúdos especiais.</p>
+        <button class="button button-gold" data-open-auth>Entrar para o círculo <span>→</span></button>
+        <div class="membership-benefits">
+          <span>01<br><small>Favoritos</small></span>
+          <span>02<br><small>Promoções</small></span>
+          <span>03<br><small>Conteúdo exclusivo</small></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="newsletter">
+      <p class="eyebrow">Carta Lumiara</p>
+      <h2>Uma boa escolha,<br><em>direto na sua caixa de entrada.</em></h2>
+      <form id="newsletterForm">
+        <label class="sr-only" for="newsletterEmail">Seu melhor e-mail</label>
+        <input id="newsletterEmail" type="email" placeholder="Seu melhor e-mail" required>
+        <button type="submit">Quero receber <span>→</span></button>
+      </form>
+      <p class="form-note">Cadastre-se e receba um cupom de boas-vindas.</p>
+      <div class="welcome-coupon" id="welcomeCoupon" hidden>
+        <span>Seu cupom</span>
+        <strong>LUMIARA10</strong>
+        <button type="button" id="copyCoupon">Copiar</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-top">
+      <div>
+        <a class="brand footer-brand" href="#inicio"><span class="brand-mark">L</span><span class="brand-word">Lum<span class="star-i">ı<span aria-hidden="true">✦</span></span>ara</span></a>
+        <p>Curadoria Lumiara.<br>Escolhas que iluminam a vida.</p>
+      </div>
+      <div class="footer-links"><span>Explorar</span><a href="#curadoria">Curadoria</a><a href="#ebooks">Biblioteca</a><a href="#inspiracoes">Inspirações</a></div>
+      <div class="footer-links"><span>Conectar</span><a href="#">Instagram</a><a href="#">Pinterest</a><a href="#">YouTube</a></div>
+      <div class="footer-links"><span>Informações</span><a href="#">Sobre</a><a href="#">Privacidade</a><a href="#">Termos</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Lumiara</span><span>Feito com intenção.</span></div>
+  </footer>
+
+  <div class="modal-backdrop" id="authModal" aria-hidden="true">
+    <section class="auth-modal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+      <button class="modal-close" aria-label="Fechar">×</button>
+      <div class="auth-visual">
+        <p class="eyebrow light">Minha Lumiara</p>
+        <blockquote>“Luxo é ter clareza sobre o que merece o seu tempo.”</blockquote>
+        <span>Curadoria personalizada para você.</span>
+      </div>
+      <div class="auth-content">
+        <div class="auth-tabs">
+          <button class="active" data-auth-tab="login">Entrar</button>
+          <button data-auth-tab="register">Criar conta</button>
+        </div>
+        <h2 id="authTitle">Bem-vinda de volta.</h2>
+        <p id="authSubtitle">Continue de onde parou e veja suas escolhas salvas.</p>
+        <form id="authForm">
+          <div class="name-field hidden">
+            <label for="authName">Como podemos chamar você?</label>
+            <input id="authName" type="text" placeholder="Seu nome">
+          </div>
+          <label for="authEmail">E-mail</label>
+          <input id="authEmail" type="email" placeholder="voce@email.com" required>
+          <label for="authPassword">Senha</label>
+          <div class="password-wrap">
+            <input id="authPassword" type="password" placeholder="Mínimo de 6 caracteres" minlength="6" required>
+            <button type="button" class="show-password">Mostrar</button>
+          </div>
+          <div class="auth-options"><label><input type="checkbox"> Lembrar de mim</label><button type="button">Esqueci minha senha</button></div>
+          <button class="button button-dark auth-submit" type="submit">Entrar <span>→</span></button>
+        </form>
+        <p class="auth-privacy">Ao continuar, você concorda com nossos Termos e Política de Privacidade.</p>
+      </div>
+    </section>
+  </div>
+
+  <aside class="profile-drawer" aria-hidden="true">
+    <button class="drawer-close" aria-label="Fechar">×</button>
+    <p class="eyebrow">Minha Lumiara</p>
+    <h2>Olá, <span id="profileName">Luna</span>.</h2>
+    <p>Sua próxima boa escolha está mais perto.</p>
+    <div class="profile-menu">
+      <button><span>♡</span><div><strong>Favoritos</strong><small><b id="drawerFavoriteCount">0</b> escolhas salvas</small></div><i>→</i></button>
+      <button><span>◫</span><div><strong>Minha biblioteca</strong><small>Leituras e downloads</small></div><i>→</i></button>
+      <button><span>✦</span><div><strong>Preferências</strong><small>Personalize sua curadoria</small></div><i>→</i></button>
+      <button><span>⌁</span><div><strong>Alertas Lumiara</strong><small>Promoções do seu interesse</small></div><i>→</i></button>
+    </div>
+    <button class="sign-out">Sair da conta</button>
+  </aside>
+
+  <div class="product-modal-backdrop" aria-hidden="true">
+    <section class="product-modal" role="dialog" aria-modal="true">
+      <button class="product-modal-close" aria-label="Fechar">×</button>
+      <div class="product-modal-art"></div>
+      <div>
+        <p class="eyebrow">Escolha Lumiara</p>
+        <h2 id="productModalName"></h2>
+        <p>Design preciso, presença discreta e qualidade para permanecer. Esta escolha foi avaliada por utilidade, acabamento e impacto real na rotina.</p>
+        <strong id="productModalPrice"></strong>
+        <button class="button button-dark">Ver oferta selecionada <span>↗</span></button>
+      </div>
+    </section>
+  </div>
+
+  <div class="search-panel" aria-hidden="true">
+    <button class="search-close" aria-label="Fechar busca">×</button>
+    <p class="eyebrow">Busca Lumiara</p>
+    <label class="sr-only" for="searchInput">Buscar</label>
+    <input id="searchInput" type="search" placeholder="O que pode melhorar o seu dia?">
+    <div class="search-suggestions"><span>Experimente</span><button>Foco</button><button>Casa</button><button>Leitura</button><button>Bem-estar</button></div>
+    <div id="searchResults"></div>
+  </div>
+
+  <div class="toast" role="status" aria-live="polite"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
