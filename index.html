@@ -88,8 +88,23 @@
       <div class="feature-copy">
         <p class="eyebrow">Produtos Lumiara</p>
         <h2>Boas escolhas para<br><em>cada jeito de viver.</em></h2>
-        <p>Casa, lazer, movimento e bem-estar em um só lugar.</p>
-        <a class="arrow-link" href="#produtos">Ver produtos <span>↗</span></a>
+        <p>Achados para casa, rotina, presentes e autocuidado, com links diretos para comprar com segurança pelo Mercado Pago.</p>
+        <div class="sales-points" aria-label="Diferenciais da curadoria">
+          <span>Compra segura</span>
+          <span>Favoritos salvos</span>
+          <span>Curadoria por ambiente</span>
+        </div>
+        <div class="affiliate-showcase">
+          <div class="affiliate-showcase-head">
+            <strong>Mais procurados</strong>
+            <div class="carousel-controls" aria-label="Controlar carrossel de produtos">
+              <button type="button" id="affiliatePrev" aria-label="Ver produtos anteriores">‹</button>
+              <button type="button" id="affiliateNext" aria-label="Ver próximos produtos">›</button>
+            </div>
+          </div>
+          <div class="affiliate-carousel" id="affiliateCarousel" aria-label="Produtos selecionados"></div>
+        </div>
+        <a class="button button-dark affiliate-main-link" href="https://www.mercadolivre.com.br/social/jacgarcia82/lists?matt_tool=70324340&forceInApp=true" target="_blank" rel="noopener">Ver lista completa <span>↗</span></a>
       </div>
     </section>
 
@@ -239,13 +254,13 @@
     <p class="eyebrow">Minha Lumiara</p>
     <h2>Olá, <span id="profileName">Luna</span>.</h2>
     <p>Sua próxima boa escolha está mais perto.</p>
+    <div class="profile-detail" id="profileDetail" hidden></div>
     <div class="profile-menu">
       <button data-profile-action="favorites"><span>♡</span><div><strong>Favoritos</strong><small><b id="drawerFavoriteCount">0</b> escolhas salvas</small></div><i>→</i></button>
       <button data-profile-action="library"><span>◫</span><div><strong>Minha biblioteca</strong><small>Leituras e downloads</small></div><i>→</i></button>
       <button data-profile-action="preferences"><span>✦</span><div><strong>Preferências</strong><small>Personalize sua curadoria</small></div><i>→</i></button>
       <button data-profile-action="alerts"><span>⌁</span><div><strong>Alertas Lumiara</strong><small>Promoções do seu interesse</small></div><i>→</i></button>
     </div>
-    <div class="profile-detail" id="profileDetail" hidden></div>
     <button class="sign-out">Sair da conta</button>
   </aside>
 

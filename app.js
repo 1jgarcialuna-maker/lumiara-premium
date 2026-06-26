@@ -7,7 +7,8 @@ const supabaseClient = window.supabase?.createClient(SUPABASE_URL, SUPABASE_PUBL
 
 const state = {
   user: JSON.parse(localStorage.getItem("lumiara-user") || "null"),
-  favorites: JSON.parse(localStorage.getItem("lumiara-favorites") || "[]")
+  favorites: JSON.parse(localStorage.getItem("lumiara-favorites") || "[]"),
+  bookFavorites: JSON.parse(localStorage.getItem("lumiara-book-favorites") || "[]")
 };
 
 const productCollections = {
@@ -44,6 +45,99 @@ const productCollections = {
     ["Faixas elásticas", "Treino", "https://meli.la/2ErohcS"]
   ]
 };
+
+const AFFILIATE_LIST_URL = "https://www.mercadolivre.com.br/social/jacgarcia82/lists?matt_tool=70324340&forceInApp=true";
+
+const affiliateHighlights = [
+  {
+    name: "Beliche de madeira",
+    type: "Quarto",
+    category: "Espaço melhor aproveitado",
+    benefit: "Uma solução bonita para quartos compartilhados e casas que precisam render mais.",
+    image: "assets/produtos-afiliados/beliche-madeira.jpeg",
+    link: AFFILIATE_LIST_URL
+  },
+  {
+    name: "Quadros decorativos",
+    type: "Decoração",
+    category: "Parede com presença",
+    benefit: "O jeito mais rápido de deixar sala, quarto ou corredor com cara de projeto.",
+    image: "assets/produtos-afiliados/quadros-florais-dourados.jpeg",
+    link: "https://meli.la/23gGnkd"
+  },
+  {
+    name: "Cortina blackout",
+    type: "Casa",
+    category: "Conforto que se nota",
+    benefit: "Mais privacidade, menos claridade e um acabamento elegante para a janela.",
+    image: "assets/produtos-afiliados/cortina-bege.jpeg",
+    link: AFFILIATE_LIST_URL
+  },
+  {
+    name: "Tapete peludo",
+    type: "Conforto",
+    category: "Quarto mais aconchegante",
+    benefit: "Aquele toque macio que muda a sensação do ambiente sem reforma.",
+    image: "assets/produtos-afiliados/tapete-peludo.jpeg",
+    link: "https://meli.la/2ydc96H"
+  },
+  {
+    name: "Lustre LED dourado",
+    type: "Iluminação",
+    category: "Luz com efeito premium",
+    benefit: "Uma peça central para valorizar sala de jantar, hall ou ambiente integrado.",
+    image: "assets/produtos-afiliados/lustre-led-dourado.jpeg",
+    link: "https://meli.la/2oV6NVv"
+  },
+  {
+    name: "Abajur tripé",
+    type: "Iluminação",
+    category: "Sala mais acolhedora",
+    benefit: "Cria luz indireta e deixa o espaço mais convidativo no fim do dia.",
+    image: "assets/produtos-afiliados/abajur-tripe.jpeg",
+    link: "https://meli.la/1Lj1qMw"
+  },
+  {
+    name: "Luminária lua",
+    type: "Presente",
+    category: "Detalhe que encanta",
+    benefit: "Uma escolha afetiva para quarto, cabeceira ou presente criativo.",
+    image: "assets/produtos-afiliados/luminaria-lua.jpeg",
+    link: AFFILIATE_LIST_URL
+  },
+  {
+    name: "Varal de sacada",
+    type: "Organização",
+    category: "Praticidade em apartamento",
+    benefit: "Aproveita melhor a varanda e resolve a rotina sem ocupar o chão.",
+    image: "assets/produtos-afiliados/varal-sacada.jpeg",
+    link: AFFILIATE_LIST_URL
+  },
+  {
+    name: "Deck para varanda",
+    type: "Área externa",
+    category: "Sacada com acabamento",
+    benefit: "Transforma piso simples em um cantinho mais bonito e fácil de cuidar.",
+    image: "assets/produtos-afiliados/deck-sacada.jpeg",
+    link: AFFILIATE_LIST_URL
+  },
+  {
+    name: "Potes de vidro com bambu",
+    type: "Cozinha",
+    category: "Organização que aparece",
+    benefit: "Deixa temperos e mantimentos visíveis, bonitos e fáceis de alcançar.",
+    image: "assets/produtos-afiliados/potes-bambu.jpeg",
+    link: AFFILIATE_LIST_URL
+  },
+  {
+    name: "Jogo de panelas",
+    type: "Cozinha",
+    category: "Cozinha pronta para começar",
+    benefit: "Um conjunto versátil para deixar o preparo do dia a dia mais bonito.",
+    image: "assets/produtos-afiliados/jogo-panelas.jpeg",
+    link: AFFILIATE_LIST_URL
+  }
+];
 
 const books = [
   {
@@ -275,7 +369,37 @@ const books = [
 let activeBookFilter = "todos";
 let booksExpanded = false;
 
-const allProducts = () => Object.values(productCollections).flat().map(([name, type, link]) => ({ name, type, link }));
+const allProducts = () => {
+  const items = [
+    ...Object.values(productCollections).flat().map(([name, type, link]) => ({ name, type, link })),
+    ...affiliateHighlights.map(({ name, type, link }) => ({ name, type, link }))
+  ];
+  return [...new Map(items.map(item => [item.name, item])).values()];
+};
+const favoriteBooks = () => books.filter(book => state.bookFavorites.includes(book.title));
+const totalFavorites = () => state.favorites.length + state.bookFavorites.length;
+
+const renderAffiliateCarousel = () => {
+  const carousel = $("#affiliateCarousel");
+  if (!carousel) return;
+  carousel.innerHTML = affiliateHighlights.map(product => {
+    const external = product.link.startsWith("http");
+    return `
+    <article class="affiliate-card" data-name="${product.name}" data-type="${product.type}" data-link="${product.link}">
+      <a href="${product.link}" ${external ? 'target="_blank" rel="noopener"' : ""}>
+        <img src="${product.image}" alt="${product.name} selecionado pela Lumiara" loading="lazy">
+        <div>
+          <span>${product.category}</span>
+          <h3>${product.name}</h3>
+          <p>${product.benefit}</p>
+          <strong>Ver oferta <b>↗</b></strong>
+        </div>
+      </a>
+      <button class="favorite-button" type="button" aria-label="Salvar ${product.name}">♡</button>
+    </article>
+  `}).join("");
+  updateFavorites();
+};
 
 const renderProducts = (category = "quarto") => {
   $("#realProducts").innerHTML = productCollections[category].map(([name, type, link]) => `
@@ -293,10 +417,13 @@ const renderBooks = () => {
   const filtered = books.filter(book => activeBookFilter === "todos" || book.type === activeBookFilter);
   const visible = booksExpanded ? filtered : filtered.slice(0, 8);
   $("#bookCatalog").innerHTML = visible.map(book => `
-    <article class="catalog-book" data-type="${book.type}">
-      <a class="catalog-cover" href="${book.link}" target="_blank" rel="noopener">
-        <img src="${book.cover}" alt="Capa de ${book.title}" loading="lazy">
-      </a>
+    <article class="catalog-book" data-title="${book.title}" data-type="${book.type}" data-link="${book.link}">
+      <div class="catalog-media">
+        <a class="catalog-cover" href="${book.link}" target="_blank" rel="noopener">
+          <img src="${book.cover}" alt="Capa de ${book.title}" loading="lazy">
+        </a>
+        <button class="book-favorite-button" type="button" aria-label="Salvar ${book.title}">♡</button>
+      </div>
       <div class="catalog-book-copy">
         <span>${book.label}</span>
         <h3>${book.title}</h3>
@@ -306,6 +433,7 @@ const renderBooks = () => {
   `).join("");
   $("#showMoreBooks").hidden = filtered.length <= 8;
   $("#showMoreBooks").innerHTML = `${booksExpanded ? "Ver menos" : "Ver mais livros"} <span>${booksExpanded ? "↑" : "↓"}</span>`;
+  updateFavorites();
 };
 
 $$(".scene-card").forEach(button => button.addEventListener("click", () => {
@@ -317,6 +445,20 @@ $("#showMoreBooks").addEventListener("click", () => {
   booksExpanded = !booksExpanded;
   renderBooks();
 });
+
+const scrollAffiliateCarousel = (direction) => {
+  const carousel = $("#affiliateCarousel");
+  if (!carousel) return;
+  carousel.scrollBy({ left: direction * Math.min(360, carousel.clientWidth * .82), behavior: "smooth" });
+};
+
+let carouselTimer;
+const startCarouselDrift = (direction) => {
+  clearInterval(carouselTimer);
+  scrollAffiliateCarousel(direction);
+  carouselTimer = setInterval(() => scrollAffiliateCarousel(direction), 950);
+};
+const stopCarouselDrift = () => clearInterval(carouselTimer);
 
 const toast = (message) => {
   const element = $(".toast");
@@ -341,14 +483,21 @@ const updateMemberUI = () => {
 };
 
 const updateFavorites = () => {
-  const count = state.favorites.length;
+  const count = totalFavorites();
   $("#favoriteCount").textContent = count;
   $("#drawerFavoriteCount").textContent = count;
   $("#favoriteCount").classList.toggle("visible", count > 0);
-  $$(".product-card[data-name], .real-product[data-name]").forEach(card => {
+  $$(".product-card[data-name], .real-product[data-name], .affiliate-card[data-name]").forEach(card => {
     const button = $(".favorite-button", card);
     if (!button) return;
     const active = state.favorites.includes(card.dataset.name);
+    button.classList.toggle("active", active);
+    button.textContent = active ? "♥" : "♡";
+  });
+  $$(".catalog-book[data-title]").forEach(card => {
+    const button = $(".book-favorite-button", card);
+    if (!button) return;
+    const active = state.bookFavorites.includes(card.dataset.title);
     button.classList.toggle("active", active);
     button.textContent = active ? "♥" : "♡";
   });
@@ -359,15 +508,22 @@ const updateFavorites = () => {
 const renderProfileFavorites = () => {
   const detail = $("#profileDetail");
   const products = allProducts().filter(product => state.favorites.includes(product.name));
+  const savedBooks = favoriteBooks();
   detail.dataset.view = "favorites";
   detail.hidden = false;
-  detail.innerHTML = products.length
-    ? `<h3>Seus favoritos</h3>${products.map(product => `
+  detail.innerHTML = (products.length || savedBooks.length)
+    ? `<h3>Seus favoritos</h3>
+      ${products.length ? `<div class="favorite-group"><p>Produtos salvos</p>${products.map(product => `
         <a href="${product.link}" target="_blank" rel="noopener">
           <div><span>${product.type}</span><strong>${product.name}</strong></div><i>↗</i>
         </a>
-      `).join("")}`
-    : `<h3>Seus favoritos</h3><p>Toque no coração dos produtos para guardar suas escolhas aqui.</p>`;
+      `).join("")}</div>` : ""}
+      ${savedBooks.length ? `<div class="favorite-group"><p>Biblioteca salva</p>${savedBooks.map(book => `
+        <a href="${book.link}" target="_blank" rel="noopener">
+          <div><span>${book.label}</span><strong>${book.title}</strong></div><i>↗</i>
+        </a>
+      `).join("")}</div>` : ""}`
+    : `<h3>Seus favoritos</h3><p>Toque no coração dos produtos e dos e-books para guardar tudo aqui.</p>`;
 };
 
 const authModal = $("#authModal");
@@ -376,6 +532,7 @@ const openAuth = () => {
   if (state.user) {
     profileDrawer.classList.add("open");
     profileDrawer.setAttribute("aria-hidden", "false");
+    renderProfileFavorites();
   } else {
     authModal.classList.add("open");
     authModal.setAttribute("aria-hidden", "false");
@@ -477,7 +634,9 @@ const initializeSupabaseSession = async () => {
     if (event === "SIGNED_OUT") {
       rememberLocalUser(null);
       state.favorites = [];
+      state.bookFavorites = [];
       localStorage.removeItem("lumiara-favorites");
+      localStorage.removeItem("lumiara-book-favorites");
       updateMemberUI();
       updateFavorites();
       return;
@@ -553,7 +712,9 @@ $(".sign-out").addEventListener("click", () => {
   supabaseClient?.auth.signOut();
   rememberLocalUser(null);
   state.favorites = [];
+  state.bookFavorites = [];
   localStorage.removeItem("lumiara-favorites");
+  localStorage.removeItem("lumiara-book-favorites");
   profileDrawer.classList.remove("open");
   lockPage(false);
   updateMemberUI();
@@ -586,20 +747,13 @@ $(".profile-menu").addEventListener("click", event => {
     : "Preferências personalizadas entram na próxima etapa da Lumiara.");
 });
 
-$("#realProducts").addEventListener("click", async event => {
-  const favoriteButton = event.target.closest(".favorite-button");
-  if (!favoriteButton) return;
-
-  event.stopPropagation();
-  event.preventDefault();
-
+const toggleProductFavorite = async (card) => {
   if (!state.user) {
     openAuth();
     toast("Entre para salvar favoritos.");
     return;
   }
 
-  const card = favoriteButton.closest(".real-product");
   const name = card.dataset.name;
   const wasSaved = state.favorites.includes(name);
 
@@ -617,13 +771,63 @@ $("#realProducts").addEventListener("click", async event => {
   }
 
   toast(wasSaved ? "Escolha removida dos favoritos." : "Escolha salva na sua Lumiara.");
+};
+
+const handleProductFavoriteClick = async (event) => {
+  const favoriteButton = event.target.closest(".favorite-button");
+  if (!favoriteButton) return;
+
+  event.stopPropagation();
+  event.preventDefault();
+  await toggleProductFavorite(favoriteButton.closest("[data-name]"));
+};
+
+$("#realProducts").addEventListener("click", handleProductFavoriteClick);
+$("#affiliateCarousel")?.addEventListener("click", handleProductFavoriteClick);
+
+$("#bookCatalog").addEventListener("click", event => {
+  const favoriteButton = event.target.closest(".book-favorite-button");
+  if (!favoriteButton) return;
+
+  event.stopPropagation();
+  event.preventDefault();
+
+  if (!state.user) {
+    openAuth();
+    toast("Entre para salvar sua biblioteca.");
+    return;
+  }
+
+  const card = favoriteButton.closest(".catalog-book");
+  const title = card.dataset.title;
+  const wasSaved = state.bookFavorites.includes(title);
+
+  state.bookFavorites = wasSaved
+    ? state.bookFavorites.filter(item => item !== title)
+    : [...state.bookFavorites, title];
+
+  localStorage.setItem("lumiara-book-favorites", JSON.stringify(state.bookFavorites));
+  updateFavorites();
+  toast(wasSaved ? "Livro removido dos favoritos." : "Livro salvo na sua biblioteca.");
 });
 
 $(".favorites-trigger").addEventListener("click", () => {
   if (!state.user) return openAuth();
   profileDrawer.classList.add("open");
+  renderProfileFavorites();
   lockPage(true);
 });
+
+$("#affiliatePrev")?.addEventListener("click", () => scrollAffiliateCarousel(-1));
+$("#affiliateNext")?.addEventListener("click", () => scrollAffiliateCarousel(1));
+$("#affiliatePrev")?.addEventListener("mouseenter", () => startCarouselDrift(-1));
+$("#affiliateNext")?.addEventListener("mouseenter", () => startCarouselDrift(1));
+$("#affiliatePrev")?.addEventListener("mouseleave", stopCarouselDrift);
+$("#affiliateNext")?.addEventListener("mouseleave", stopCarouselDrift);
+$("#affiliatePrev")?.addEventListener("focus", () => startCarouselDrift(-1));
+$("#affiliateNext")?.addEventListener("focus", () => startCarouselDrift(1));
+$("#affiliatePrev")?.addEventListener("blur", stopCarouselDrift);
+$("#affiliateNext")?.addEventListener("blur", stopCarouselDrift);
 
 const productModal = $(".product-modal-backdrop");
 $$(".quick-view").forEach(button => button.addEventListener("click", event => {
@@ -779,6 +983,7 @@ $$(".manifesto > *, .feature-copy > *, .section-heading, .product-card, .book-ro
 
 updateMemberUI();
 updateFavorites();
+renderAffiliateCarousel();
 renderProducts();
 renderBooks();
 initializeSupabaseSession();
