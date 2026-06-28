@@ -3,7 +3,143 @@ const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)]
 
 const SUPABASE_URL = "https://skaughhzuqtjumbirnwc.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_h3ceoyUb9Ntrm-IfDnOI4g_VsG-76ia";
-const supabaseClient = window.supabase?.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+const createSupabaseLiteClient = (url, key) => {
+  const authStorageKey = "lumiara-supabase-session";
+  const getSession = () => JSON.parse(localStorage.getItem(authStorageKey) || "null");
+  const setSession = (session) => {
+    if (session?.access_token) {
+      localStorage.setItem(authStorageKey, JSON.stringify(session));
+    } else {
+      localStorage.removeItem(authStorageKey);
+    }
+  };
+  const headers = (auth = true) => {
+    const session = getSession();
+    return {
+      apikey: key,
+      Authorization: auth && session?.access_token ? `Bearer ${session.access_token}` : `Bearer ${key}`,
+      "Content-Type": "application/json"
+    };
+  };
+  const jsonRequest = async (endpoint, options = {}) => {
+    const response = await fetch(`${url}${endpoint}`, options);
+    const text = await response.text();
+    const data = text ? JSON.parse(text) : null;
+    if (!response.ok) throw new Error(data?.msg || data?.message || "Não foi possível concluir agora.");
+    return data;
+  };
+  const table = (name) => {
+    const endpoint = `/rest/v1/${name}`;
+    const builder = {
+      filters: new URLSearchParams(),
+      mode: "select",
+      body: null,
+      select(columns = "*") {
+        this.mode = "select";
+        this.filters.set("select", columns);
+        return this;
+      },
+      order(column, options = {}) {
+        this.filters.set("order", `${column}.${options.ascending ? "asc" : "desc"}`);
+        return this;
+      },
+      insert(body) {
+        this.mode = "insert";
+        this.body = body;
+        return this.run();
+      },
+      upsert(body, options = {}) {
+        const query = options.onConflict ? `?on_conflict=${encodeURIComponent(options.onConflict)}` : "";
+        return jsonRequest(`${endpoint}${query}`, {
+          method: "POST",
+          headers: { ...headers(), Prefer: "resolution=merge-duplicates,return=minimal" },
+          body: JSON.stringify(body)
+        }).then(() => ({ data: null, error: null })).catch(error => ({ data: null, error }));
+      },
+      delete() {
+        this.mode = "delete";
+        return this;
+      },
+      eq(column, value) {
+        this.filters.append(column, `eq.${value}`);
+        return this;
+      },
+      async run() {
+        try {
+          const query = this.filters.toString();
+          const data = await jsonRequest(`${endpoint}${query ? `?${query}` : ""}`, {
+            method: this.mode === "select" ? "GET" : this.mode === "delete" ? "DELETE" : "POST",
+            headers: { ...headers(), Prefer: "return=minimal" },
+            body: this.mode === "insert" ? JSON.stringify(this.body) : undefined
+          });
+          return { data: data || [], error: null };
+        } catch (error) {
+          return { data: null, error };
+        }
+      },
+      then(resolve, reject) {
+        return this.run().then(resolve, reject);
+      }
+    };
+    return builder;
+  };
+
+  return {
+    auth: {
+      async signUp({ email, password, options }) {
+        try {
+          const data = await jsonRequest("/auth/v1/signup", {
+            method: "POST",
+            headers: headers(false),
+            body: JSON.stringify({ email, password, data: options?.data || {} })
+          });
+          if (data.session) setSession(data.session);
+          return { data: { user: data.user, session: data.session }, error: null };
+        } catch (error) {
+          return { data: {}, error };
+        }
+      },
+      async signInWithPassword({ email, password }) {
+        try {
+          const data = await jsonRequest("/auth/v1/token?grant_type=password", {
+            method: "POST",
+            headers: headers(false),
+            body: JSON.stringify({ email, password })
+          });
+          setSession(data);
+          return { data: { user: data.user, session: data }, error: null };
+        } catch (error) {
+          return { data: {}, error };
+        }
+      },
+      async getUser() {
+        const session = getSession();
+        if (!session?.access_token) return { data: { user: null }, error: null };
+        try {
+          const user = await jsonRequest("/auth/v1/user", { headers: headers() });
+          return { data: { user }, error: null };
+        } catch (error) {
+          setSession(null);
+          return { data: { user: null }, error };
+        }
+      },
+      async signOut() {
+        const session = getSession();
+        if (session?.access_token) {
+          await fetch(`${url}/auth/v1/logout`, { method: "POST", headers: headers() }).catch(() => {});
+        }
+        setSession(null);
+      },
+      onAuthStateChange() {
+        return { data: { subscription: { unsubscribe() {} } } };
+      }
+    },
+    from: table
+  };
+};
+const supabaseClient = window.supabase?.createClient
+  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY)
+  : createSupabaseLiteClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
 const state = {
   user: JSON.parse(localStorage.getItem("lumiara-user") || "null"),
